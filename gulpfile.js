@@ -1,83 +1,107 @@
-var gulp = require('gulp');
-var uglify = require('gulp-uglify');
-var htmlmin = require('gulp-htmlmin');
-var cssmin = require('gulp-cssmin');
-var concat = require('gulp-concat');
-var zip = require('gulp-zip');
-var fs = require('fs');
-var mkdirp = require('mkdirp');
-var chalk = require('chalk');
-var watch = require('gulp-watch');
+var gulp          = require('gulp'),
+    webserver     = require('gulp-webserver'),
+    opn           = require('opn'),
+    concat        = require('gulp-concat'),
+    minifyCSS     = require('gulp-minify-css'),
+    rename        = require('gulp-rename'),
+    uglify        = require('gulp-uglify'),
+    jshint        = require('gulp-jshint'),
+    minifyHTML    = require('gulp-minify-html'),
+    replaceHTML   = require('gulp-html-replace'),
+    rimraf        = require('gulp-rimraf'),
+    ignore        = require('gulp-ignore'),
+    zip           = require('gulp-zip'),
+    checkFileSize = require('gulp-check-filesize'),
+    watch         = require('gulp-watch'),
 
-//Chalk colors
-var error = chalk.bold.red;
-var success = chalk.green;
-var regular = chalk.white;
+    serveDir = './',
 
-gulp.task('watch', (done) => {
-	gulp.watch('./src/js/**/*.js', gulp.series('build-js', 'zip', 'check'));
-	gulp.watch('./src/html/**/*.html', gulp.series('build-html', 'check'));
-	gulp.watch('./src/css/**/*.css', gulp.series('build-css', 'check'));
-	gulp.watch('./src/assets/**/*', gulp.series('build-assets', 'check'));
+    server = {
+        host: 'localhost',
+        port: '5000'
+    },
+
+    distPaths = {
+        build: 'build',
+        js_build_file: 'game.min.js',
+        css_build_file: 'game.min.css'
+    },
+
+    sourcePaths = {
+        css: [
+            'src/css/*.css',
+        ],
+        js: [
+            'src/js/game.js',
+            'src/js/utils.js',
+            'src/js/pluto.js'
+        ],
+        mainHtml: [
+            'index.html'
+        ]
+    };
+
+gulp.task('serve', function () {
+    gulp.src(serveDir)
+        .pipe(webserver({
+            host: server.host,
+            port: server.port,
+            fallback: 'index.html',
+            livereload: false,
+            directoryListing: false,
+            open: true
+    }));
 });
 
-gulp.task('init', (done) => {
-	//Create our directory structure
-	mkdirp('./src', function (err) {
-		mkdirp('./src/js', function (err) {
-			mkdirp('./src/html', function (err) {
-				mkdirp('./src/css', function (err) {
-					mkdirp('./src/assets', function (err) {
-						done();
-					});
-				});
-			});
-		});
-	});
+gulp.task('openbrowser', function () {
+    opn( 'http://' + server.host + ':' + server.port );
 });
 
-gulp.task('build-js', (done) => {
-	return gulp.src('./src/js/**/*.js')
-	.pipe(concat('game.js'))
-	.pipe(uglify())
-	.pipe(gulp.dest('./build/'));
+gulp.task('buildCSS', function () {
+    return gulp.src(sourcePaths.css)
+        .pipe(concat(distPaths.css_build_file))
+        .pipe(minifyCSS())
+        .pipe(gulp.dest(distPaths.build));
 });
 
-gulp.task('build-html', (done) => {
-	return gulp.src('./src/html/**/*.html')
-		.pipe(htmlmin({collapseWhitespace: true}))
-		.pipe(gulp.dest('./build/'));
+gulp.task('buildJS', function () {
+    return gulp.src(sourcePaths.js)
+        .pipe(concat(distPaths.js_build_file))
+        .pipe(uglify())
+        .pipe(gulp.dest(distPaths.build));
 });
 
-gulp.task('build-css', (done) => {
-	return gulp.src('./src/css/**/*.css')
-		.pipe(cssmin())
-		.pipe(gulp.dest('./build/'));
+gulp.task('buildIndex', function () {
+    return gulp.src(sourcePaths.mainHtml)
+        .pipe(replaceHTML({
+            'css': distPaths.css_build_file,
+            'js': distPaths.js_build_file
+        }))
+        .pipe(minifyHTML())
+        .pipe(rename('index.html'))
+        .pipe(gulp.dest(distPaths.build));
 });
 
-gulp.task('build-assets', (done) => {
-	return gulp.src('./src/assets/**/*')
-		.pipe(gulp.dest('./build/'));
+gulp.task('cleanBuild', function () {
+    return gulp.src('./build/*', { read: false })
+        .pipe(ignore('.gitignore'))
+        .pipe(rimraf());
 });
 
-gulp.task('zip', (done) => {
-	return gulp.src('./build/**/*')
-		.pipe(zip('entry.zip')) //gulp-zip performs compression by default
-		.pipe(gulp.dest('dist'));
+gulp.task('zipBuild', function () {
+    return gulp.src('./build/*')
+        .pipe(zip('game.zip'))
+        .pipe(gulp.dest('./dist'))
+        .pipe(checkFileSize({
+            fileSizeLimit: 16384
+        }));
 });
 
-gulp.task('check', gulp.series('zip', (done) => {
-	var stats = fs.statSync("./dist/entry.zip")
-	var fileSize = stats.size;
-	if (fileSize > 13312) {
-		console.log(error("Your zip compressed game is larger than 13kb (13312 bytes)!"))
-		console.log(regular("Your zip compressed game is " + fileSize + " bytes"));
-	} else {
-		console.log(success("Your zip compressed game is " + fileSize + " bytes."));
-	}
-	done();
-}));
+gulp.task('watch', function () {
+    gulp.watch(sourcePaths.css, ['buildCSS', 'zipBuild']);
+    gulp.watch(sourcePaths.js, ['buildJS', 'zipBuild']);
+    gulp.watch(sourcePaths.mainHtml, ['buildIndex', 'zipBuild']);
+});
 
-gulp.task('default', gulp.series('build-html', 'build-js', 'build-assets', 'check', (done) => {
-	done();
-}));
+gulp.task('build', ['buildJS', 'buildCSS', 'buildIndex', 'zipBuild']);
+gulp.task('default', ['build', 'serve', 'watch']);
