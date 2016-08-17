@@ -2,6 +2,7 @@ var gulp          = require('gulp'),
     webserver     = require('gulp-webserver'),
     opn           = require('opn'),
     concat        = require('gulp-concat'),
+    livereload    = require('gulp-livereload'),
     minifyCSS     = require('gulp-minify-css'),
     rename        = require('gulp-rename'),
     uglify        = require('gulp-uglify'),
@@ -33,6 +34,8 @@ var gulp          = require('gulp'),
         ],
         js: [
             'src/js/game.js',
+            'src/js/weapon.js',
+            'src/js/engineer.js',
             'src/js/utils.js',
             'src/js/pluto.js'
         ],
@@ -61,14 +64,16 @@ gulp.task('buildCSS', function () {
     return gulp.src(sourcePaths.css)
         .pipe(concat(distPaths.css_build_file))
         .pipe(minifyCSS())
-        .pipe(gulp.dest(distPaths.build));
+        .pipe(gulp.dest(distPaths.build))
+        .pipe(livereload());
 });
 
 gulp.task('buildJS', function () {
     return gulp.src(sourcePaths.js)
         .pipe(concat(distPaths.js_build_file))
         .pipe(uglify())
-        .pipe(gulp.dest(distPaths.build));
+        .pipe(gulp.dest(distPaths.build))
+        .pipe(livereload());
 });
 
 gulp.task('buildIndex', function () {
@@ -98,6 +103,7 @@ gulp.task('zipBuild', function () {
 });
 
 gulp.task('watch', function () {
+    livereload.listen();
     gulp.watch(sourcePaths.css, ['buildCSS', 'zipBuild']);
     gulp.watch(sourcePaths.js, ['buildJS', 'zipBuild']);
     gulp.watch(sourcePaths.mainHtml, ['buildIndex', 'zipBuild']);
