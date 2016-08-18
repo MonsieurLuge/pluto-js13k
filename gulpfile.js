@@ -3,7 +3,7 @@ var gulp          = require('gulp'),
     opn           = require('opn'),
     concat        = require('gulp-concat'),
     livereload    = require('gulp-livereload'),
-    minifyCSS     = require('gulp-minify-css'),
+    cleanCSS      = require('gulp-clean-css'),
     rename        = require('gulp-rename'),
     uglify        = require('gulp-uglify'),
     jshint        = require('gulp-jshint'),
@@ -63,7 +63,7 @@ gulp.task('openbrowser', function () {
 gulp.task('buildCSS', function () {
     return gulp.src(sourcePaths.css)
         .pipe(concat(distPaths.css_build_file))
-        .pipe(minifyCSS())
+        .pipe(cleanCSS())
         .pipe(gulp.dest(distPaths.build))
         .pipe(livereload());
 });

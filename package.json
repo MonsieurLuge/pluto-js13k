@@ -1,12 +1,12 @@
 {
-  "name": "js13k_starter",
+  "name": "pluto-js13k",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Ayman Farhat",
+  "author": "Monsieur Luge",
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
