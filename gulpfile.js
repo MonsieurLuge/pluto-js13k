@@ -34,6 +34,7 @@ var gulp          = require('gulp'),
         ],
         js: [
             'src/js/game.js',
+            'src/js/player.js',
             'src/js/engineer.js',
             'src/js/livingentity.js',
             'src/js/utils.js',
