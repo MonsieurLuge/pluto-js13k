@@ -12,4 +12,8 @@ var game = new Game(
     300
 );
 
-game.start();
+try {
+    game.start();
+} catch (error) {
+    console.log('Oops, something goes wrong : ' + error)
+}

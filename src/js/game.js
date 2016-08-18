@@ -1,6 +1,7 @@
 function Game(canvas, sceneWidth, sceneHeight) {
     this.canvas         = canvas;
     this.context        = canvas.getContext('2d');
+    this.keyboard       = undefined; // TODO add keyboard to the game
     this.livingEntities = [];
     this.sceneWidth     = sceneWidth;
     this.sceneHeight    = sceneHeight;
@@ -24,12 +25,13 @@ Game.prototype.scaleScene = function() {
 }
 
 /**
- * Starts the game
+ * Initialize and starts the game
  */
 Game.prototype.start = function() {
     // add some living entities
     this.livingEntities.push(
-        new LivingEntity(
+        new Player(
+            undefined, // TODO add the mouse to the player,
             new Engineer([]),
             Math.round(Math.random() * 400),
             Math.round(Math.random() * 300)
@@ -50,27 +52,42 @@ Game.prototype.start = function() {
     // scale the scene once before the game really starts
     this.scaleScene();
 
-    this.render();
+    this.run();
 };
 
 /**
- * Renders the entire scene
+ * Runs the game
  */
-Game.prototype.render = function() {
-    // requestAnimationFrame(this.render.bind(this));
+Game.prototype.run = function() {
+    requestAnimationFrame(this.run.bind(this));
 
-    // draw background
-    // TODO
+    // game mechanics, animations, IA, etc
+    this.animate();
+
+    // render the scene
+    this.render();
+}
+
+Game.prototype.animate = function() {
+    // living entities
+    for (var index = 0; index < this.livingEntities.length; index++) {
+        this.livingEntities[index].live();
+    }
+
+    // TODO animate particles
+}
+
+Game.prototype.render = function() {
+    // TODO draw background
     this.context.fillStyle = "#313131";
     this.context.beginPath();
     this.context.rect(0, 0, this.canvas.width, this.canvas.height);
     this.context.fill();
 
-    // draw "static" entities
-    // TODO
+    // TODO draw "static" entities
 
     // draw "living" entities
     for (var index = 0; index < this.livingEntities.length; index++) {
         this.livingEntities[index].draw(this.context);
     }
-};
+}

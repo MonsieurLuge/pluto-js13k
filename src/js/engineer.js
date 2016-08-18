@@ -1,11 +1,11 @@
+/**
+ * Engineer object (Engineer is an Entity)
+ * @param {array} items
+ */
 function Engineer(items) {
     this.state     = 'idle';
     this.life      = 100;
     this.inventory = items;
-}
-
-Engineer.prototype.name = function() {
-    console.log('Engineer #' + Math.round(Math.random() * 100));
 }
 
 /**
