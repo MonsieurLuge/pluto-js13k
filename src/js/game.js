@@ -50,7 +50,7 @@ Game.prototype.start = function() {
     );
 
     this.livingEntities.push(
-        new IA(
+        new AI(
             new Engineer(
                 '#902080',
                 []

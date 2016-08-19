@@ -1,10 +1,10 @@
 /**
- * TODO [IA description]
+ * TODO [AI description]
  * @param {[type]} entity [description]
  * @param {[type]} xPos   [description]
  * @param {[type]} yPos   [description]
  */
-function IA(entity, xPos, yPos) {
+function AI(entity, xPos, yPos) {
     this.entity = entity;
     this.xPos   = xPos;
     this.yPos   = yPos;
@@ -15,7 +15,7 @@ function IA(entity, xPos, yPos) {
  * @param  {[type]} context [description]
  * @return {[type]}         [description]
  */
-IA.prototype.draw = function(context) {
+AI.prototype.draw = function(context) {
     this.entity.draw(context, this.xPos, this.yPos);
 }
 
@@ -23,11 +23,11 @@ IA.prototype.draw = function(context) {
  * TODO [live description]
  * @return {[type]} [description]
  */
-IA.prototype.live = function() {
+AI.prototype.live = function() {
     return [];
 }
 
-IA.prototype.move = function(xDelta, yDelta) {
+AI.prototype.move = function(xDelta, yDelta) {
     this.xPos += xDelta;
     this.yPos += yDelta;
 }
