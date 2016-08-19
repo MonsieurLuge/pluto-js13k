@@ -10,8 +10,19 @@ function Player(mouse, entity, xPos, yPos) {
     this.yPos   = yPos;
 }
 
+/**
+ * TODO [draw description]
+ * @param  {[type]} context [description]
+ * @return {[type]}         [description]
+ */
 Player.prototype.draw = function(context) {
     this.entity.draw(context, this.xPos, this.yPos);
 }
 
-Player.prototype.live = function() {}
+/**
+ * TODO [live description]
+ * @return {[type]} [description]
+ */
+Player.prototype.live = function() {
+    return [];
+}

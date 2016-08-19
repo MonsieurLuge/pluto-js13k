@@ -6,14 +6,20 @@
  * @author: Monsieur Luge
  */
 
+// initialization
 var game = new Game(
     document.getElementById("pluto"),
     400,
     300
 );
 
+game.start(); // TODO remove, only for test purpose
+
+// run
 try {
-    game.start();
+    game.run();
 } catch (error) {
-    console.log('Oops, something goes wrong : ' + error)
+    game.stop();
+
+    console.log('Oops, something goes wrong: ' + error)
 }

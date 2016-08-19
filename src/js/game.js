@@ -1,3 +1,9 @@
+/**
+ * TODO [Game description]
+ * @param {[type]} canvas      [description]
+ * @param {[type]} sceneWidth  [description]
+ * @param {[type]} sceneHeight [description]
+ */
 function Game(canvas, sceneWidth, sceneHeight) {
     this.canvas         = canvas;
     this.context        = canvas.getContext('2d');
@@ -6,6 +12,7 @@ function Game(canvas, sceneWidth, sceneHeight) {
     this.sceneWidth     = sceneWidth;
     this.sceneHeight    = sceneHeight;
     this.seed           = Math.random();
+    this.state          = 'stop';
     this.staticEntities = [];
 }
 
@@ -26,21 +33,28 @@ Game.prototype.scaleScene = function() {
 
 /**
  * Initialize and starts the game
+ * TODO remove this method and use only the constructor
  */
 Game.prototype.start = function() {
-    // add some living entities
+    // add some entities for test purpose
     this.livingEntities.push(
         new Player(
             undefined, // TODO add the mouse to the player,
-            new Engineer([]),
+            new Engineer(
+                '#905000',
+                []
+            ),
             Math.round(Math.random() * 400),
             Math.round(Math.random() * 300)
         )
     );
 
     this.livingEntities.push(
-        new LivingEntity(
-            new Engineer([]),
+        new IA(
+            new Engineer(
+                '#902080',
+                []
+            ),
             Math.round(Math.random() * 400),
             Math.round(Math.random() * 300)
         )
@@ -52,31 +66,46 @@ Game.prototype.start = function() {
     // scale the scene once before the game really starts
     this.scaleScene();
 
-    this.run();
+    this.state = 'run';
 };
 
 /**
  * Runs the game
  */
 Game.prototype.run = function() {
-    requestAnimationFrame(this.run.bind(this));
+    if (this.state == 'run') {
+        // game loop
+        requestAnimationFrame(this.run.bind(this));
 
-    // game mechanics, animations, IA, etc
-    this.animate();
+        // game mechanics, animations, IA, etc
+        this.animate();
 
-    // render the scene
-    this.render();
+        // render the scene
+        this.render();
+    }
 }
 
+/**
+ * TODO [animate description]
+ * @return {[type]} [description]
+ */
 Game.prototype.animate = function() {
     // living entities
     for (var index = 0; index < this.livingEntities.length; index++) {
-        this.livingEntities[index].live();
-    }
+        var desiredAction = this.livingEntities[index].live();
 
-    // TODO animate particles
+        // if (desiredAction['action'] == 'move-left') {
+        //     if (this.livingEntities[index].xPos > 10) {
+        //         this.livingEntities[index].move(-1 * desiredAction['param'], 0);
+        //     }
+        // }
+    }
 }
 
+/**
+ * TODO [render description]
+ * @return {[type]} [description]
+ */
 Game.prototype.render = function() {
     // TODO draw background
     this.context.fillStyle = "#313131";
@@ -85,9 +114,16 @@ Game.prototype.render = function() {
     this.context.fill();
 
     // TODO draw "static" entities
+    for (var index = 0; index < this.staticEntities.length; index++) {
+        this.staticEntities[index].draw(this.context);
+    }
 
     // draw "living" entities
     for (var index = 0; index < this.livingEntities.length; index++) {
         this.livingEntities[index].draw(this.context);
     }
+}
+
+Game.prototype.stop = function() {
+    this.state = 'stop';
 }

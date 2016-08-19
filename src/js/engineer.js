@@ -2,10 +2,11 @@
  * Engineer object (Engineer is an Entity)
  * @param {array} items
  */
-function Engineer(items) {
-    this.state     = 'idle';
-    this.life      = 100;
-    this.inventory = items;
+function Engineer(color, items) {
+    this.color         = color;
+    this.inventory     = items;
+    this.life          = 100;
+    this.state         = 'idle';
 }
 
 /**
@@ -15,7 +16,7 @@ function Engineer(items) {
  * @param  {integer} yPos
  */
 Engineer.prototype.draw = function(context, xPos, yPos) {
-    context.fillStyle = "#A00050";
+    context.fillStyle = this.color;
     context.beginPath();
     context.rect(xPos, yPos, 8, 16);
     context.fill();

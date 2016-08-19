@@ -36,7 +36,7 @@ var gulp          = require('gulp'),
             'src/js/game.js',
             'src/js/player.js',
             'src/js/engineer.js',
-            'src/js/livingentity.js',
+            'src/js/ia.js',
             'src/js/utils.js',
             'src/js/pluto.js'
         ],
