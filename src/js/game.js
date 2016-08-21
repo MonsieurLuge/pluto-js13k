@@ -16,10 +16,11 @@ function Game(canvas, sceneWidth, sceneHeight) {
     this.staticEntities = [];
 }
 
+
 /**
  * Scale the scene to fit the screen on each window update
  */
-Game.prototype.scaleScene = function() {
+Game.prototype.__scaleScene = function() {
     minScaleValue = Math.min(
         window.innerWidth / this.sceneWidth,
         window.innerHeight / this.sceneHeight
@@ -30,7 +31,6 @@ Game.prototype.scaleScene = function() {
 
     this.context.scale(minScaleValue, minScaleValue);
 }
-
 /**
  * Initialize and starts the game
  * TODO remove this method and use only the constructor
@@ -41,22 +41,24 @@ Game.prototype.start = function() {
         new Player(
             undefined, // TODO add the mouse to the player,
             new Engineer(
+                'player',
                 '#905000',
                 []
             ),
-            Math.round(Math.random() * 400),
-            Math.round(Math.random() * 300)
+            Math.round(Math.random() * 392),
+            Math.round(Math.random() * 284)
         )
     );
 
     this.livingEntities.push(
         new AI(
             new Engineer(
+                'ai engineer #1',
                 '#902080',
                 []
             ),
-            Math.round(Math.random() * 400),
-            Math.round(Math.random() * 300)
+            Math.round(Math.random() * 392),
+            Math.round(Math.random() * 284)
         )
     );
 
@@ -64,8 +66,9 @@ Game.prototype.start = function() {
     // window.addEventListener('resize', this.scaleScene, false);
 
     // scale the scene once before the game really starts
-    this.scaleScene();
+    this.__scaleScene();
 
+    // it's now ok to run the game
     this.state = 'run';
 };
 
@@ -78,35 +81,79 @@ Game.prototype.run = function() {
         requestAnimationFrame(this.run.bind(this));
 
         // game mechanics, animations, IA, etc
-        this.animate();
+        this.__animate();
 
         // render the scene
-        this.render();
+        this.__render();
     }
 }
 
 /**
- * TODO [animate description]
- * @return {[type]} [description]
+ * Stops the game
  */
-Game.prototype.animate = function() {
+Game.prototype.stop = function() {
+    this.state = 'stop';
+}
+
+/**
+ * Animate each entity (AI scripts, movements, etc)
+ */
+Game.prototype.__animate = function() {
     // living entities
     for (var index = 0; index < this.livingEntities.length; index++) {
-        var desiredAction = this.livingEntities[index].live();
+        var desiredAction = this.livingEntities[index].live(this.__environment(index));
 
-        // if (desiredAction['action'] == 'move-left') {
-        //     if (this.livingEntities[index].xPos > 10) {
-        //         this.livingEntities[index].move(-1 * desiredAction['param'], 0);
-        //     }
-        // }
+        if (desiredAction != undefined) {
+            var angle = desiredAction['move']['angle'];
+            var speed = desiredAction['move']['speed'];
+
+            this.livingEntities[index].xPos += speed * Math.cos(angle);
+            this.livingEntities[index].yPos += speed * Math.sin(angle);
+        }
     }
 }
 
 /**
- * TODO [render description]
- * @return {[type]} [description]
+ * Returns the entity environment
+ * @param  {integer} livingEntityIndex
+ * @return {array}
  */
-Game.prototype.render = function() {
+Game.prototype.__environment = function(livingEntityIndex) {
+    var environment = [];
+
+    // living entities
+    for (var index = 0; index < this.livingEntities.length; index++) {
+        if (index == livingEntityIndex) {
+            continue;
+        }
+
+        var target = this.livingEntities[index];
+
+        environment.push({
+            'type' : target.type(),
+            'in-sight' : true,
+            'position' : this.__targetPosition(
+                this.livingEntities[livingEntityIndex].coordinates(),
+                target.coordinates()
+            ),
+            'path-to-target' : []
+        });
+    }
+
+    // static entities
+    for (var index = 0; index < this.staticEntities.length; index++) {
+
+    }
+
+    // TODO terrain
+
+    return environment;
+}
+
+/**
+ * Renders the scene
+ */
+Game.prototype.__render = function() {
     // TODO draw background
     this.context.fillStyle = "#313131";
     this.context.beginPath();
@@ -124,6 +171,39 @@ Game.prototype.render = function() {
     }
 }
 
-Game.prototype.stop = function() {
-    this.state = 'stop';
+/**
+ * Scale the scene to fit the screen on each window update
+ */
+Game.prototype.__scaleScene = function() {
+    minScaleValue = Math.min(
+        window.innerWidth / this.sceneWidth,
+        window.innerHeight / this.sceneHeight
+    );
+
+    this.canvas.width  = this.sceneWidth * minScaleValue;
+    this.canvas.height = this.sceneHeight * minScaleValue;
+
+    this.context.scale(minScaleValue, minScaleValue);
+}
+
+/**
+ * Returns the target's position
+ * @param  {array} entityCoordinates
+ * @param  {array} targetCoordinates
+ * @return {array} [angle, distance]
+ */
+Game.prototype.__targetPosition = function(entityCoordinates, targetCoordinates) {
+    var xDistance = targetCoordinates[0] - entityCoordinates[0];
+    var yDistance = targetCoordinates[1] - entityCoordinates[1];
+
+    return {
+        'angle' : Math.round(
+            (Math.atan2(yDistance, xDistance) / (Math.PI * 2)) * 360
+        ),
+        'distance' : Math.round(
+            Math.sqrt(
+                Math.pow(xDistance, 2) + Math.pow(yDistance, 2)
+            )
+        )
+    }
 }

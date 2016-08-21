@@ -6,8 +6,16 @@
  */
 function AI(entity, xPos, yPos) {
     this.entity = entity;
-    this.xPos   = xPos;
-    this.yPos   = yPos;
+    this.xPos   = xPos; // TODO move this to the Game object
+    this.yPos   = yPos; // TODO move this to the Game object
+}
+
+/**
+ * Returns the entity coordinates
+ * @return {array}
+ */
+AI.prototype.coordinates = function() {
+    return [this.xPos, this.yPos];
 }
 
 /**
@@ -21,13 +29,17 @@ AI.prototype.draw = function(context) {
 
 /**
  * TODO [live description]
+ * @param {array} environment
  * @return {[type]} [description]
  */
-AI.prototype.live = function() {
-    return [];
+AI.prototype.live = function(environment) {
+    return this.entity.nextAction(environment);
 }
 
-AI.prototype.move = function(xDelta, yDelta) {
-    this.xPos += xDelta;
-    this.yPos += yDelta;
+/**
+ * Returns the entity type
+ * @return {string}
+ */
+AI.prototype.type = function() {
+    return 'ai';
 }
