@@ -2,21 +2,22 @@
  * Player object (Player is a LivingEntity)
  * @param {[type]} mouse
  * @param {Entity} entity
+ * @param {Coordinates} coordinates
  */
-function Player(mouse, entity, xPos, yPos) {
-    this.entity = entity;
-    this.mouse  = mouse;
-    this.xPos   = xPos; // TODO move this to the Game object
-    this.yPos   = yPos; // TODO move this to the Game object
+function Player(mouse, entity, coordinates) {
+    var self         = this;
+    this.entity      = entity;
+    this.mouse       = mouse;
+    this.coordinates = coordinates; // TODO move this to the Game object
 }
 
 /**
  * Returns the entity coordinates
- * @return {array}
+ * @return {Coordinates}
  */
-Player.prototype.coordinates = function() {
-    return [this.xPos, this.yPos];
-}
+// Player.prototype.coordinates = function() {
+//     return self.coordinates;
+// }
 
 /**
  * TODO [draw description]
@@ -24,7 +25,10 @@ Player.prototype.coordinates = function() {
  * @return {[type]}         [description]
  */
 Player.prototype.draw = function(context) {
-    this.entity.draw(context, this.xPos, this.yPos);
+    this.entity.draw(
+        context,
+        this.coordinates
+    );
 }
 
 /**

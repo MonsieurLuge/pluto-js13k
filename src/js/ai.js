@@ -1,22 +1,20 @@
 /**
  * TODO [AI description]
- * @param {[type]} entity [description]
- * @param {[type]} xPos   [description]
- * @param {[type]} yPos   [description]
+ * @param {Entity} entity
+ * @param {Coordinates} coordinates
  */
-function AI(entity, xPos, yPos) {
-    this.entity = entity;
-    this.xPos   = xPos; // TODO move this to the Game object
-    this.yPos   = yPos; // TODO move this to the Game object
+function AI(entity, coordinates) {
+    this.entity      = entity;
+    this.coordinates = coordinates; // TODO move this to the Game object
 }
 
 /**
  * Returns the entity coordinates
  * @return {array}
  */
-AI.prototype.coordinates = function() {
-    return [this.xPos, this.yPos];
-}
+// AI.prototype.coordinates = function() {
+//     return this.coordinates;
+// }
 
 /**
  * TODO [draw description]
@@ -24,7 +22,7 @@ AI.prototype.coordinates = function() {
  * @return {[type]}         [description]
  */
 AI.prototype.draw = function(context) {
-    this.entity.draw(context, this.xPos, this.yPos);
+    this.entity.draw(context, this.coordinates);
 }
 
 /**

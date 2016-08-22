@@ -16,7 +16,6 @@ function Game(canvas, sceneWidth, sceneHeight) {
     this.staticEntities = [];
 }
 
-
 /**
  * Scale the scene to fit the screen on each window update
  */
@@ -45,8 +44,10 @@ Game.prototype.start = function() {
                 '#905000',
                 []
             ),
-            Math.round(Math.random() * 392),
-            Math.round(Math.random() * 284)
+            new Coordinates(
+                Math.round(Math.random() * 392),
+                Math.round(Math.random() * 284)
+            )
         )
     );
 
@@ -57,8 +58,10 @@ Game.prototype.start = function() {
                 '#902080',
                 []
             ),
-            Math.round(Math.random() * 392),
-            Math.round(Math.random() * 284)
+            new Coordinates(
+                Math.round(Math.random() * 392),
+                Math.round(Math.random() * 284)
+            )
         )
     );
 
@@ -107,8 +110,10 @@ Game.prototype.__animate = function() {
             var angle = desiredAction['move']['angle'];
             var speed = desiredAction['move']['speed'];
 
-            this.livingEntities[index].xPos += speed * Math.cos(angle);
-            this.livingEntities[index].yPos += speed * Math.sin(angle);
+            this.livingEntities[index].coordinates = new Coordinates(
+                this.livingEntities[index].coordinates.longitude + speed * Math.cos(angle),
+                this.livingEntities[index].coordinates.latitude + speed * Math.sin(angle)
+            );
         }
     }
 }
@@ -132,9 +137,9 @@ Game.prototype.__environment = function(livingEntityIndex) {
         environment.push({
             'type' : target.type(),
             'in-sight' : true,
-            'position' : this.__targetPosition(
-                this.livingEntities[livingEntityIndex].coordinates(),
-                target.coordinates()
+            'position' : new TargetPosition(
+                this.livingEntities[livingEntityIndex].coordinates,
+                target.coordinates
             ),
             'path-to-target' : []
         });
@@ -184,26 +189,4 @@ Game.prototype.__scaleScene = function() {
     this.canvas.height = this.sceneHeight * minScaleValue;
 
     this.context.scale(minScaleValue, minScaleValue);
-}
-
-/**
- * Returns the target's position
- * @param  {array} entityCoordinates
- * @param  {array} targetCoordinates
- * @return {array} [angle, distance]
- */
-Game.prototype.__targetPosition = function(entityCoordinates, targetCoordinates) {
-    var xDistance = targetCoordinates[0] - entityCoordinates[0];
-    var yDistance = targetCoordinates[1] - entityCoordinates[1];
-
-    return {
-        'angle' : Math.round(
-            (Math.atan2(yDistance, xDistance) / (Math.PI * 2)) * 360
-        ),
-        'distance' : Math.round(
-            Math.sqrt(
-                Math.pow(xDistance, 2) + Math.pow(yDistance, 2)
-            )
-        )
-    }
 }

@@ -18,8 +18,8 @@ game.start(); // TODO remove, only for test purpose
 // run
 try {
     game.run();
-} catch (error) {
+} catch (errorMessage) {
     game.stop();
 
-    console.log('Oops, something goes wrong: ' + error)
+    console.log('Oops, something goes wrong: ', errorMessage);
 }

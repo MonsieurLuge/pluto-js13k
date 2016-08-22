@@ -34,10 +34,11 @@ var gulp          = require('gulp'),
         ],
         js: [
             'src/js/game.js',
-            'src/js/player.js',
-            'src/js/engineer.js',
+            'src/js/targetposition.js',
+            'src/js/coordinates.js',
             'src/js/ai.js',
-            'src/js/utils.js',
+            'src/js/engineer.js',
+            'src/js/player.js',
             'src/js/pluto.js'
         ],
         mainHtml: [
