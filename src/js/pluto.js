@@ -8,16 +8,32 @@
 
 // initialization
 var game = new Game(
-    document.getElementById("pluto"),
-    400,
-    300
+    new Scene(
+        new Canvas(
+            'pluto',
+            new MaxWidthRatio(
+                400,
+                window.innerWidth
+            ),
+            new MaxHeightRatio(
+                300,
+                window.innerHeight
+            )
+        )
+    ),
+    new Canvas(
+        'buffer',
+        400,
+        300
+    )
 );
 
 game.start(); // TODO remove, only for test purpose
 
 // run
 try {
-    game.run();
+    game.run('debug');
+    // game.run();
 } catch (errorMessage) {
     game.stop();
 

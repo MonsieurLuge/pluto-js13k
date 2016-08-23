@@ -1,5 +1,5 @@
 /**
- * Player object (Player is a LivingEntity)
+ * Player object (Player is a "living entity")
  * @param {[type]} mouse
  * @param {Entity} entity
  * @param {Coordinates} coordinates

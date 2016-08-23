@@ -1,5 +1,5 @@
 /**
- * TODO [AI description]
+ * AI object (AI is a "living entity")
  * @param {Entity} entity
  * @param {Coordinates} coordinates
  */

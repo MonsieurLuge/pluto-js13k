@@ -1,5 +1,5 @@
 /**
- * TODO [Coordinates description]
+ * Coordinates object
  * @param {integer} longitude
  * @param {integer} latitude
  */

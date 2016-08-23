@@ -1,35 +1,17 @@
 /**
- * TODO [Game description]
- * @param {[type]} canvas      [description]
- * @param {[type]} sceneWidth  [description]
- * @param {[type]} sceneHeight [description]
+ * Game object
+ * @param {Scene} scene
+ * @param {Canvas} buffer
  */
-function Game(canvas, sceneWidth, sceneHeight) {
-    this.canvas         = canvas;
-    this.context        = canvas.getContext('2d');
+function Game(scene, buffer) {
+    this.buffer         = buffer;
     this.keyboard       = undefined; // TODO add keyboard to the game
     this.livingEntities = [];
-    this.sceneWidth     = sceneWidth;
-    this.sceneHeight    = sceneHeight;
-    this.seed           = Math.random();
+    this.scene          = scene;
     this.state          = 'stop';
     this.staticEntities = [];
 }
 
-/**
- * Scale the scene to fit the screen on each window update
- */
-Game.prototype.__scaleScene = function() {
-    minScaleValue = Math.min(
-        window.innerWidth / this.sceneWidth,
-        window.innerHeight / this.sceneHeight
-    );
-
-    this.canvas.width  = this.sceneWidth * minScaleValue;
-    this.canvas.height = this.sceneHeight * minScaleValue;
-
-    this.context.scale(minScaleValue, minScaleValue);
-}
 /**
  * Initialize and starts the game
  * TODO remove this method and use only the constructor
@@ -65,12 +47,6 @@ Game.prototype.start = function() {
         )
     );
 
-    // TODO scale the scene on each window resize
-    // window.addEventListener('resize', this.scaleScene, false);
-
-    // scale the scene once before the game really starts
-    this.__scaleScene();
-
     // it's now ok to run the game
     this.state = 'run';
 };
@@ -78,10 +54,12 @@ Game.prototype.start = function() {
 /**
  * Runs the game
  */
-Game.prototype.run = function() {
+Game.prototype.run = function(mode) {
     if (this.state == 'run') {
         // game loop
-        requestAnimationFrame(this.run.bind(this));
+        if (mode != 'debug') { // TODO remove debug
+            requestAnimationFrame(this.run.bind(this));
+        }
 
         // game mechanics, animations, IA, etc
         this.__animate();
@@ -159,34 +137,25 @@ Game.prototype.__environment = function(livingEntityIndex) {
  * Renders the scene
  */
 Game.prototype.__render = function() {
-    // TODO draw background
-    this.context.fillStyle = "#313131";
-    this.context.beginPath();
-    this.context.rect(0, 0, this.canvas.width, this.canvas.height);
-    this.context.fill();
+    var canvas  = this.buffer.canvas();
+    var context = this.buffer.context2d();
 
-    // TODO draw "static" entities
+    // TODO draw background
+    context.fillStyle = "#313131";
+    context.beginPath();
+    context.rect(0, 0, canvas.width, canvas.height);
+    context.fill();
+
+    // draw "static" entities
     for (var index = 0; index < this.staticEntities.length; index++) {
-        this.staticEntities[index].draw(this.context);
+        this.staticEntities[index].draw(context);
     }
 
     // draw "living" entities
     for (var index = 0; index < this.livingEntities.length; index++) {
-        this.livingEntities[index].draw(this.context);
+        this.livingEntities[index].draw(context);
     }
-}
 
-/**
- * Scale the scene to fit the screen on each window update
- */
-Game.prototype.__scaleScene = function() {
-    minScaleValue = Math.min(
-        window.innerWidth / this.sceneWidth,
-        window.innerHeight / this.sceneHeight
-    );
-
-    this.canvas.width  = this.sceneWidth * minScaleValue;
-    this.canvas.height = this.sceneHeight * minScaleValue;
-
-    this.context.scale(minScaleValue, minScaleValue);
+    // send the resulting image to the scene
+    this.scene.scaleBuffer(this.buffer);
 }

@@ -1,3 +1,8 @@
+/**
+ * TargetPosition object
+ * @param {Coordinates} entityCoordinates
+ * @param {Coordinates} targetCoordinates
+ */
 function TargetPosition(entityCoordinates, targetCoordinates) {
     this.entityCoordinates = entityCoordinates;
     this.targetCoordinates = targetCoordinates;
