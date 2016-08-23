@@ -109,23 +109,20 @@ Game.prototype.__loop = function(mode) {
  * Renders the scene
  */
 Game.prototype.__render = function() {
-    var canvas  = this.buffer.canvas();
-    var context = this.buffer.context2d();
-
     // TODO draw background
-    context.fillStyle = "#313131";
-    context.beginPath();
-    context.rect(0, 0, canvas.width, canvas.height);
-    context.fill();
+    this.buffer.context2d().fillStyle = "#313131";
+    this.buffer.context2d().beginPath();
+    this.buffer.context2d().rect(0, 0, this.buffer.canvas().width, this.buffer.canvas().height);
+    this.buffer.context2d().fill();
 
     // draw "static" entities
     for (var index = 0; index < this.staticEntities.length; index++) {
-        this.staticEntities[index].draw(context);
+        this.staticEntities[index].draw(this.buffer.context2d());
     }
 
     // draw "living" entities
     for (var index = 0; index < this.livingEntities.length; index++) {
-        this.livingEntities[index].draw(context);
+        this.livingEntities[index].draw(this.buffer.context2d());
     }
 
     // send the resulting image to the scene
