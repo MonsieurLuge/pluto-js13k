@@ -20,7 +20,7 @@ MaxWidthRatio.prototype.valueOf = function() {
     return Math.floor(
         this.width * Math.min(
             this.wrapperWidth / this.width,
-            window.wrapperHeight / this.height
+            this.wrapperHeight / this.height
         )
     );
 }

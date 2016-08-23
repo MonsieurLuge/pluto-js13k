@@ -20,7 +20,7 @@ MaxHeightRatio.prototype.valueOf = function() {
     return Math.floor(
         this.height * Math.min(
             this.wrapperWidth / this.width,
-            window.wrapperHeight / this.height
+            this.wrapperHeight / this.height
         )
     );
 }

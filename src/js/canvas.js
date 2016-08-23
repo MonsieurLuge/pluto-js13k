@@ -25,7 +25,6 @@ Canvas.prototype.canvas = function() {
     } else {
         this.cachedCanvas    = document.createElement('canvas');
         this.cachedCanvas.id = this.name;
-        document.body.appendChild(this.cachedCanvas); // TODO remove
     }
 
     this.cachedCanvas.height = this.height;

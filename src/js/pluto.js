@@ -13,10 +13,14 @@ var game = new Game(
             'pluto',
             new MaxWidthRatio(
                 400,
-                window.innerWidth
+                300,
+                window.innerWidth,
+                window.innerHeight
             ),
             new MaxHeightRatio(
+                400,
                 300,
+                window.innerWidth,
                 window.innerHeight
             )
         )
