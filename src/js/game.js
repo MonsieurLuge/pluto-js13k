@@ -1,12 +1,17 @@
 /**
  * Game object
- * @param {Scene} scene
+ * @param {Scene}  scene
  * @param {Canvas} buffer
+ * @param {Chapters} chapters
  */
-function Game(scene, buffer) {
+function Game(scene, buffer, chapters, player) {
     this.buffer         = buffer;
+    this.chapter        = [];
+    this.chapterNumber  = 1;
+    this.chapters       = chapters;
     this.keyboard       = undefined; // TODO add keyboard to the game
     this.livingEntities = [];
+    this.player         = player;
     this.scene          = scene;
     this.state          = 'stop';
     this.staticEntities = [];
@@ -19,18 +24,7 @@ function Game(scene, buffer) {
 Game.prototype.start = function() {
     // add some entities for test purpose
     this.livingEntities.push(
-        new Player(
-            undefined, // TODO add the mouse to the player,
-            new Engineer(
-                'player',
-                '#905000',
-                []
-            ),
-            new Coordinates(
-                Math.round(Math.random() * 392),
-                Math.round(Math.random() * 284)
-            )
-        )
+        this.player
     );
 
     this.livingEntities.push(

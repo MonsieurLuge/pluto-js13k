@@ -1,7 +1,7 @@
 /**
  * Player object (Player is a "living entity")
- * @param {[type]} mouse
- * @param {Entity} entity
+ * @param {[type]}      mouse
+ * @param {Entity}      entity
  * @param {Coordinates} coordinates
  */
 function Player(mouse, entity, coordinates) {

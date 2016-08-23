@@ -32,6 +32,21 @@ var game = new Game(
         'buffer',
         sceneWidth,
         sceneHeight
+    ),
+    new Chapters([
+        new Chapter('the_awakening', 1)
+    ]),
+    new Player(
+        undefined, // TODO add the mouse to the player,
+        new Engineer(
+            'player',
+            '#905000',
+            []
+        ),
+        new Coordinates(
+            Math.round(Math.random() * 392),
+            Math.round(Math.random() * 284)
+        )
     )
 );
 
