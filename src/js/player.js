@@ -5,35 +5,33 @@
  * @param {Coordinates} coordinates
  */
 function Player(mouse, entity, coordinates) {
-    var self         = this;
-    this.entity      = entity;
-    this.mouse       = mouse;
-    this.coordinates = coordinates; // TODO move this to the Game object
+    this.__entity      = entity;
+    this.__mouse       = mouse;
+    this.__coordinates = coordinates; // TODO move this to the Game object
 }
 
 /**
  * Returns the entity coordinates
  * @return {Coordinates}
  */
-// Player.prototype.coordinates = function() {
-//     return self.coordinates;
-// }
+Player.prototype.coordinates = function() {
+    return this.__coordinates;
+}
 
 /**
- * TODO [draw description]
- * @param  {[type]} context [description]
- * @return {[type]}         [description]
+ * Draws the player's entity
+ * @param {CanvasRenderingContext2D} context
  */
 Player.prototype.draw = function(context) {
-    this.entity.draw(
+    this.__entity.draw(
         context,
-        this.coordinates
+        this.__coordinates
     );
 }
 
 /**
- * TODO [live description]
- * @return {[type]} [description]
+ * The player never requests the entity about its next action
+ * @return {undefined}
  */
 Player.prototype.live = function() {
     return undefined;

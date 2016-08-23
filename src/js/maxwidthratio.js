@@ -6,10 +6,10 @@
  * @param {integer} wrapperHeight
  */
 function MaxWidthRatio(width, height, wrapperWidth, wrapperHeight) {
-    this.height        = height;
-    this.width         = width;
-    this.wrapperHeight = wrapperHeight;
-    this.wrapperWidth  = wrapperWidth;
+    this.__height        = height;
+    this.__width         = width;
+    this.__wrapperHeight = wrapperHeight;
+    this.__wrapperWidth  = wrapperWidth;
 }
 
 /**
@@ -18,9 +18,9 @@ function MaxWidthRatio(width, height, wrapperWidth, wrapperHeight) {
  */
 MaxWidthRatio.prototype.valueOf = function() {
     return Math.floor(
-        this.width * Math.min(
-            this.wrapperWidth / this.width,
-            this.wrapperHeight / this.height
+        this.__width * Math.min(
+            this.__wrapperWidth / this.__width,
+            this.__wrapperHeight / this.__height
         )
     );
 }

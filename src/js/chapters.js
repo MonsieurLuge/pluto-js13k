@@ -3,9 +3,9 @@
  * @param {Chapter[]} chapters
  */
 function Chapters(chapters) {
-    this.cachedCurrentChapter = undefined;
-    this.chapters             = chapters;
-    this.currentChapter       = 1;
+    this.__cachedCurrentChapter = undefined;
+    this.__chapters             = chapters;
+    this.__currentChapter       = 1;
 }
 
 /**
@@ -14,19 +14,19 @@ function Chapters(chapters) {
  * @throws {string}
  */
 Chapters.prototype.current = function() {
-    if (this.cachedCurrentChapter) {
-        return this.cachedCurrentChapter;
+    if (this.__cachedCurrentChapter) {
+        return this.__cachedCurrentChapter;
     }
 
-    for (var index = 0; index < this.chapters.length; index++) {
-        if (this.chapters[index].number == this.currentChapter) {
-            this.cachedCurrentChapter = this.chapters[index];
+    for (var index = 0; index < this.__chapters.length; index++) {
+        if (this.__chapters[index].number() == this.__currentChapter) {
+            this.__cachedCurrentChapter = this.__chapters[index];
 
-            return this.cachedCurrentChapter;
+            return this.__cachedCurrentChapter;
         }
     }
 
-    throw 'the chapter #' + this.currentChapter + ' doesn\'t exist !';
+    throw 'the chapter #' + this.__currentChapter + ' doesn\'t exist !';
 }
 
 /**
@@ -34,9 +34,9 @@ Chapters.prototype.current = function() {
  * @return {Chapter}
  */
 Chapters.prototype.next = function() {
-    this.cachedCurrentChapter = undefined;
+    this.__cachedCurrentChapter = undefined;
 
-    this.currentChapter++;
+    this.__currentChapter++;
 
     return this.current();
 }

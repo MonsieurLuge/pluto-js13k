@@ -12,8 +12,8 @@ function Engineer(name, color, items) {
 
 /**
  * Draws the engineer
- * @param  {[type]} context
- * @param  {Coordinates} coordinates
+ * @param  {CanvasRenderingContext2D} context
+ * @param  {Coordinates}              coordinates
  */
 Engineer.prototype.draw = function(context, coordinates) {
     context.fillStyle = this.color;
@@ -31,7 +31,7 @@ Engineer.prototype.name = function() {
 }
 
 /**
- * TODO [nextAction description]
+ * Returns the next action to proceed
  * @param {array} environment
  * @return {Action}
  */

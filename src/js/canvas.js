@@ -4,11 +4,11 @@
  * @param {integer} height
  */
 function Canvas(name, width, height) {
-    this.cachedCanvas    = undefined;
-    this.cached2dContext = undefined;
-    this.name            = name;
-    this.height          = height;
-    this.width           = width;
+    this.__cachedCanvas    = undefined;
+    this.__cached2dContext = undefined;
+    this.__height          = height;
+    this.__name            = name;
+    this.__width           = width;
 }
 
 /**
@@ -16,21 +16,21 @@ function Canvas(name, width, height) {
  * @return {Object}
  */
 Canvas.prototype.canvas = function() {
-    if (this.cachedCanvas) {
-        return this.cachedCanvas;
+    if (this.__cachedCanvas) {
+        return this.__cachedCanvas;
     }
 
-    if (this.__exists(this.name)) {
-        this.cachedCanvas = document.getElementById(this.name);
+    if (this.__exists(this.__name)) {
+        this.__cachedCanvas = document.getElementById(this.__name);
     } else {
-        this.cachedCanvas    = document.createElement('canvas');
-        this.cachedCanvas.id = this.name;
+        this.__cachedCanvas    = document.createElement('canvas');
+        this.__cachedCanvas.id = this.__name;
     }
 
-    this.cachedCanvas.height = this.height;
-    this.cachedCanvas.width  = this.width;
+    this.__cachedCanvas.height = this.__height;
+    this.__cachedCanvas.width  = this.__width;
 
-    return this.cachedCanvas;
+    return this.__cachedCanvas;
 }
 
 /**
@@ -38,14 +38,30 @@ Canvas.prototype.canvas = function() {
  * @type {CanvasRenderingContext2D}
  */
 Canvas.prototype.context2d = function() {
-    if (this.cached2dContext) {
-        return this.cached2dContext;
+    if (this.__cached2dContext) {
+        return this.__cached2dContext;
     }
 
-    this.cached2dContext = this.canvas().getContext('2d');
+    this.__cached2dContext = this.canvas().getContext('2d');
 
-    return this.cached2dContext;
+    return this.__cached2dContext;
 }
+
+/**
+ * Returns the canva's height
+ * @return {integer}
+ */
+Canvas.prototype.height = function () {
+    return this.__height;
+};
+
+/**
+ * Returns the canva's width
+ * @return {integer}
+ */
+Canvas.prototype.width = function () {
+    return this.__width;
+};
 
 /**
  * Does this named canvas exists ?

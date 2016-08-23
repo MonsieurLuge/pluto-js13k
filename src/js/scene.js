@@ -3,7 +3,7 @@
  * @param {Canvas} canvas
  */
 function Scene(canvas) {
-    this.canvas = canvas;
+    this.__canvas = canvas;
 }
 
 /**
@@ -11,11 +11,11 @@ function Scene(canvas) {
  * @param {Canvas} buffer
  */
 Scene.prototype.scaleBuffer = function(buffer) {
-    this.canvas.context2d().drawImage(
+    this.__canvas.context2d().drawImage(
         buffer.canvas(),
         0,
         0,
-        this.canvas.width,
-        this.canvas.height
+        this.__canvas.width(),
+        this.__canvas.height()
     );
 }

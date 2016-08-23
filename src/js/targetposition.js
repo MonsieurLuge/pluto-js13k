@@ -4,10 +4,10 @@
  * @param {Coordinates} targetCoordinates
  */
 function TargetPosition(entityCoordinates, targetCoordinates) {
-    this.entityCoordinates = entityCoordinates;
-    this.targetCoordinates = targetCoordinates;
-    this.cacheAngle        = undefined;
-    this.cacheDistance     = undefined;
+    this.__entityCoordinates = entityCoordinates;
+    this.__targetCoordinates = targetCoordinates;
+    this.__cacheAngle        = undefined;
+    this.__cacheDistance     = undefined;
 }
 
 /**
@@ -15,16 +15,16 @@ function TargetPosition(entityCoordinates, targetCoordinates) {
  * @return {float}
  */
 TargetPosition.prototype.angle = function() {
-    if (this.cacheAngle) {
-        return this.cacheAngle;
+    if (this.__cacheAngle) {
+        return this.__cacheAngle;
     }
 
-    var yDistance = this.targetCoordinates.latitude - this.entityCoordinates.latitude;
-    var xDistance = this.targetCoordinates.longitude - this.entityCoordinates.longitude;
+    var yDistance = this.__targetCoordinates.latitude() - this.__entityCoordinates.latitude();
+    var xDistance = this.__targetCoordinates.longitude() - this.__entityCoordinates.longitude();
 
-    this.cacheAngle = Math.atan2(yDistance, xDistance) / (Math.PI * 2) * 360;
+    this.__cacheAngle = Math.atan2(yDistance, xDistance) / (Math.PI * 2) * 360;
 
-    return this.cacheAngle;
+    return this.__cacheAngle;
 }
 
 /**

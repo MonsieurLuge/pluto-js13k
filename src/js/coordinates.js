@@ -4,22 +4,22 @@
  * @param {integer} latitude
  */
 function Coordinates(longitude, latitude) {
-    this.latitude  = latitude;
-    this.longitude = longitude;
+    this.__latitude  = latitude;
+    this.__longitude = longitude;
 }
 
 /**
  * Returns the latitude
  * @return {integer}
  */
-// Coordinates.prototype.latitude = function() {
-//     return Math.round(this.latitude);
-// }
+Coordinates.prototype.latitude = function() {
+    return Math.round(this.__latitude);
+}
 
 /**
  * Returns the longitude
  * @return {integer}
  */
-// Coordinates.prototype.longitude = function() {
-//     return Math.round(this.longitude);
-// }
+Coordinates.prototype.longitude = function() {
+    return Math.round(this.__longitude);
+}

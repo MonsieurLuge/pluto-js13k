@@ -4,34 +4,32 @@
  * @param {Coordinates} coordinates
  */
 function AI(entity, coordinates) {
-    this.entity      = entity;
-    this.coordinates = coordinates; // TODO move this to the Game object
+    this.__entity      = entity;
+    this.__coordinates = coordinates; // TODO move this to the Game object
 }
 
 /**
  * Returns the entity coordinates
- * @return {array}
+ * @return {Coordinates}
  */
-// AI.prototype.coordinates = function() {
-//     return this.coordinates;
-// }
-
-/**
- * TODO [draw description]
- * @param  {[type]} context [description]
- * @return {[type]}         [description]
- */
-AI.prototype.draw = function(context) {
-    this.entity.draw(context, this.coordinates);
+AI.prototype.coordinates = function() {
+    return this.__coordinates;
 }
 
 /**
- * TODO [live description]
+ * Draws the AI's entity
+ * @param {CanvasRenderingContext2D} context
+ */
+AI.prototype.draw = function(context) {
+    this.__entity.draw(context, this.__coordinates);
+}
+
+/**
+ * Request the entity about its next action
  * @param {array} environment
- * @return {[type]} [description]
  */
 AI.prototype.live = function(environment) {
-    return this.entity.nextAction(environment);
+    return this.__entity.nextAction(environment);
 }
 
 /**
