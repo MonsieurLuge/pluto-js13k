@@ -57,5 +57,5 @@ try {
 } catch (errorMessage) {
     game.stop();
 
-    console.log('Oops, something goes wrong: ', errorMessage);
+    console.log('oops, something goes wrong: ', errorMessage);
 }
