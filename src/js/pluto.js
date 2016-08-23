@@ -7,19 +7,22 @@
  */
 
 // initialization
+var sceneHeight = 300;
+var sceneWidth  = 400;
+
 var game = new Game(
     new Scene(
         new Canvas(
             'pluto',
             new MaxWidthRatio(
-                400,
-                300,
+                sceneWidth,
+                sceneHeight,
                 window.innerWidth,
                 window.innerHeight
             ),
             new MaxHeightRatio(
-                400,
-                300,
+                sceneWidth,
+                sceneHeight,
                 window.innerWidth,
                 window.innerHeight
             )
@@ -27,8 +30,8 @@ var game = new Game(
     ),
     new Canvas(
         'buffer',
-        400,
-        300
+        sceneWidth,
+        sceneHeight
     )
 );
 
