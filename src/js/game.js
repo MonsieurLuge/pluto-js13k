@@ -19,18 +19,8 @@ function Game(scene, buffer, chapters, player) {
  * Runs the game
  */
 Game.prototype.run = function(mode) {
-    if (this.state == 'run') {
-        // game loop
-        if (mode != 'debug') { // TODO remove debug
-            requestAnimationFrame(this.run.bind(this));
-        }
-
-        // game mechanics, animations, IA, etc
-        this.__animate();
-
-        // render the scene
-        this.__render();
-    }
+    // main game loop
+    this.__loop(mode);
 }
 
 /**
@@ -95,6 +85,24 @@ Game.prototype.__environment = function(livingEntityIndex) {
     // TODO terrain
 
     return environment;
+}
+
+/**
+ * Main game loop
+ * @param {string}  mode
+ */
+Game.prototype.__loop = function(mode) {
+    if (this.state == 'run') {
+        if (mode != 'debug') { // TODO remove debug
+            requestAnimationFrame(this.__loop.bind(this));
+        }
+
+        // game mechanics, animations, IA, etc
+        this.__animate();
+
+        // render the scene
+        this.__render();
+    }
 }
 
 /**

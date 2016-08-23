@@ -3,8 +3,9 @@
  * @param {Chapter[]} chapters
  */
 function Chapters(chapters) {
-    this.chapters       = chapters;
-    this.currentChapter = 1;
+    this.cachedCurrentChapter = undefined;
+    this.chapters             = chapters;
+    this.currentChapter       = 1;
 }
 
 /**
@@ -13,9 +14,15 @@ function Chapters(chapters) {
  * @throws {string}
  */
 Chapters.prototype.current = function() {
+    if (this.cachedCurrentChapter) {
+        return this.cachedCurrentChapter;
+    }
+
     for (var index = 0; index < this.chapters.length; index++) {
         if (this.chapters[index].number == this.currentChapter) {
-            return this.chapters[index];
+            this.cachedCurrentChapter = this.chapters[index];
+
+            return this.cachedCurrentChapter;
         }
     }
 
@@ -27,6 +34,8 @@ Chapters.prototype.current = function() {
  * @return {Chapter}
  */
 Chapters.prototype.next = function() {
+    this.cachedCurrentChapter = undefined;
+
     this.currentChapter++;
 
     return this.current();
