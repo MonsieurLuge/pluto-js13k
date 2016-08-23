@@ -50,8 +50,6 @@ var game = new Game(
     )
 );
 
-game.start(); // TODO remove, only for test purpose
-
 // run
 try {
     game.run('debug');

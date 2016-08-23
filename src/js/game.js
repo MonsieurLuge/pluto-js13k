@@ -6,44 +6,14 @@
  */
 function Game(scene, buffer, chapters, player) {
     this.buffer         = buffer;
-    this.chapter        = [];
-    this.chapterNumber  = 1;
     this.chapters       = chapters;
     this.keyboard       = undefined; // TODO add keyboard to the game
     this.livingEntities = [];
     this.player         = player;
     this.scene          = scene;
-    this.state          = 'stop';
+    this.state          = 'run';
     this.staticEntities = [];
 }
-
-/**
- * Initialize and starts the game
- * TODO remove this method and use only the constructor
- */
-Game.prototype.start = function() {
-    // add some entities for test purpose
-    this.livingEntities.push(
-        this.player
-    );
-
-    this.livingEntities.push(
-        new AI(
-            new Engineer(
-                'ai engineer #1',
-                '#902080',
-                []
-            ),
-            new Coordinates(
-                Math.round(Math.random() * 392),
-                Math.round(Math.random() * 284)
-            )
-        )
-    );
-
-    // it's now ok to run the game
-    this.state = 'run';
-};
 
 /**
  * Runs the game
