@@ -4,8 +4,9 @@
  * @param {integer} number
  */
 function Chapter(name, number) {
-    this.__name   = name;
-    this.__number = number;
+    this.__cachedTerrain = undefined;
+    this.__name          = name;
+    this.__number        = number;
 }
 
 /**
@@ -32,3 +33,17 @@ Chapter.prototype.name = function() {
 Chapter.prototype.number = function() {
     return this.__number;
 }
+
+/**
+ * Returns the terrain
+ * @return {Terrain}
+ */
+Chapter.prototype.__terrain = function() {
+    if (this.__cachedTerrain) {
+        return this.__cachedTerrain;
+    }
+
+    this.__cachedTerrain = [];
+
+    return this.__cachedTerrain;
+};
