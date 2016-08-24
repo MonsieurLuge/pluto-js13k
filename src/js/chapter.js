@@ -3,19 +3,7 @@
  * @param {Chapter} Chapter definition
  */
 function Chapter(chapterDefinition) {
-    this.__cachedTerrain     = undefined;
     this.__chapterDefinition = chapterDefinition;
-}
-
-/**
- * Draws the terrain
- * @param {CanvasRenderingContext2D} context
- * @param {Coordinates}              playerCoordinates
- */
-Chapter.prototype.draw = function(context, playerCoordinates) {
-    // for (var index = 0; index < this.__terrain().length; index++) {
-    //     console.log(this.__terrain().sprite(index));
-    // }
 }
 
 /**
@@ -24,7 +12,7 @@ Chapter.prototype.draw = function(context, playerCoordinates) {
  */
 Chapter.prototype.name = function() {
     return this.__chapterDefinition.name();
-};
+}
 
 /**
  * Returns the chapter's number
@@ -35,15 +23,9 @@ Chapter.prototype.number = function() {
 }
 
 /**
- * Returns the terrain
+ * Returns the chapter's terrain
  * @return {Terrain}
  */
-Chapter.prototype.__terrain = function() {
-    if (this.__cachedTerrain) {
-        return this.__cachedTerrain;
-    }
-
-    this.__cachedTerrain = new Terrain(10, '1111111111100000006110023040611111111111');
-
-    return this.__cachedTerrain;
-};
+Chapter.prototype.terrain = function() {
+    return new Terrain(10, '1111111111100000006110023040611111111111');
+}

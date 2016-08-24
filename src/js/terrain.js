@@ -21,3 +21,12 @@ Terrain.prototype.content = function() {
     //
     // return arrayContent;
 }
+
+/**
+ * Draws the terrain
+ * @param  {CanvasRenderingContext2D} context
+ * @param  {Coordinates}              coordinates
+ */
+Terrain.prototype.draw = function(context, coordinates) {
+    // TODO draw the terrain
+}

@@ -2,8 +2,9 @@
  * ChapterOne object (ChapterOne is a ChapterDefinition)
  */
 function ChapterOne() {
-    this.__name   = 'The Awakening';
-    this.__number = 1;
+    this.__name         = 'The Awakening';
+    this.__number       = 1;
+    this.__startingRoom = 'elevator to the surface';
 }
 
 /**
@@ -12,7 +13,7 @@ function ChapterOne() {
  */
 ChapterOne.prototype.name = function() {
     return this.__name;
-};
+}
 
 /**
  * Returns the chapter's number
@@ -20,7 +21,7 @@ ChapterOne.prototype.name = function() {
  */
 ChapterOne.prototype.number = function() {
     return this.__number;
-};
+}
 
 /**
  * Returns the rooms
@@ -28,4 +29,4 @@ ChapterOne.prototype.number = function() {
  */
 ChapterOne.prototype.rooms = function() {
     return []; // TODO rooms
-};
+}
