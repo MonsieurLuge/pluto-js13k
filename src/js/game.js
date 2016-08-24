@@ -97,11 +97,14 @@ Game.prototype.__loop = function(mode) {
         return;
     }
 
-    if (mode !== 'debug') { // TODO remove debug
+    // debug mode (no game loop)
+    // TODO remove debug mode
+    if (mode !== 'debug') {
+        // game loop
         requestAnimationFrame(this.__loop.bind(this));
     }
 
-    // game mechanics, animations, IA, etc
+    // game mechanics, animations, AI, etc
     this.__animate();
 
     // render the scene
