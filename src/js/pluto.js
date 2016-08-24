@@ -26,6 +26,13 @@ var game = new Game(
                 window.innerWidth,
                 window.innerHeight
             )
+        ),
+        new Background(
+            new Canvas(
+                'background',
+                sceneWidth,
+                sceneHeight
+            )
         )
     ),
     new Canvas(

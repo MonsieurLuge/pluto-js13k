@@ -109,12 +109,6 @@ Game.prototype.__loop = function(mode) {
  * Renders the scene
  */
 Game.prototype.__render = function() {
-    // clear the context
-    this.__buffer.context2d().fillStyle = "#dbdbcf";
-    this.__buffer.context2d().beginPath();
-    this.__buffer.context2d().rect(0, 0, this.__buffer.width(), this.__buffer.height());
-    this.__buffer.context2d().fill();
-
     // draw the terrain
     this.__chapters.current().draw(this.__buffer.context2d(), this.__player.coordinates());
 

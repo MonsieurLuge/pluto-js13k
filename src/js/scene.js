@@ -2,8 +2,9 @@
  * Scene object
  * @param {Canvas} canvas
  */
-function Scene(canvas) {
-    this.__canvas = canvas;
+function Scene(canvas, background) {
+    this.__background = background;
+    this.__canvas     = canvas;
 }
 
 /**
@@ -11,6 +12,10 @@ function Scene(canvas) {
  * @param {Canvas} buffer
  */
 Scene.prototype.scaleBuffer = function(buffer) {
+    // draw the background
+    this.__background.draw(this.__canvas);
+
+    // stretch the given buffer
     this.__canvas.context2d().drawImage(
         buffer.canvas(),
         0,

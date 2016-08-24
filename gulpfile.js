@@ -34,6 +34,7 @@ var gulp          = require('gulp'),
         ],
         js: [
             'src/js/game.js',
+            'src/js/background.js',
             'src/js/chapter.js',
             'src/js/chapters.js',
             'src/js/maxheightratio.js',
