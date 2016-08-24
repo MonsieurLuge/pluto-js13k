@@ -1,0 +1,70 @@
+{
+    "spritesheet": "src/img/spritesheet.png",
+    "terrain": [
+        {
+            "name": "wall",
+            "solid": true,
+            "climb": false,
+            "x": 0,
+            "y": 0,
+            "width": 8,
+            "height": 8
+        },
+        {
+            "name": "left stairs",
+            "solid": true,
+            "climb": false,
+            "x": 8,
+            "y": 0,
+            "width": 8,
+            "height": 8
+        },
+        {
+            "name": "right stairs",
+            "solid": true,
+            "climb": false,
+            "x": 16,
+            "y": 0,
+            "width": 8,
+            "height": 8
+        },
+        {
+            "name": "grid",
+            "solid": true,
+            "climb": false,
+            "x": 34,
+            "y": 0,
+            "width": 8,
+            "height": 8
+        },
+        {
+            "name": "top ladder",
+            "solid": false,
+            "climb": true,
+            "x": 42,
+            "y": 0,
+            "width": 8,
+            "height": 8
+        },
+        {
+            "name": "ladder",
+            "solid": false,
+            "climb": true,
+            "x": 50,
+            "y": 0,
+            "width": 8,
+            "height": 8
+        },
+        {
+            "name": "plain ladder",
+            "solid": true,
+            "climb": true,
+            "x": 58,
+            "y": 0,
+            "width": 8,
+            "height": 8
+        },
+    ],
+    "static-entities": [],
+    "living-entities": []
+}
