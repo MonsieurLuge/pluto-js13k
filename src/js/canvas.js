@@ -35,7 +35,7 @@ Canvas.prototype.canvas = function() {
 
 /**
  * Returns the 2D context
- * @type {CanvasRenderingContext2D}
+ * @return {CanvasRenderingContext2D}
  */
 Canvas.prototype.context2d = function() {
     if (this.__cached2dContext) {
