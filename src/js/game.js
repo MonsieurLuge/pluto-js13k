@@ -1,8 +1,9 @@
 /**
  * Game object
- * @param {Scene}  scene
- * @param {Canvas} buffer
+ * @param {Scene}    scene
+ * @param {Canvas}   buffer
  * @param {Chapters} chapters
+ * @param {Player}   player
  */
 function Game(scene, buffer, chapters, player) {
     this.__buffer         = buffer;
@@ -16,6 +17,7 @@ function Game(scene, buffer, chapters, player) {
 
 /**
  * Runs the game
+ * @param {string} mode
  */
 Game.prototype.run = function(mode) {
     // main game loop
@@ -59,7 +61,7 @@ Game.prototype.__environment = function(livingEntityIndex) {
 
     // living entities
     for (var index = 0; index < this.__livingEntities.length; index++) {
-        if (index == livingEntityIndex) {
+        if (index === livingEntityIndex) {
             continue;
         }
 
