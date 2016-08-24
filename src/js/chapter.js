@@ -1,12 +1,10 @@
 /**
  * Chapter object
- * @param {string}  name
- * @param {integer} number
+ * @param {Chapter} Chapter definition
  */
-function Chapter(name, number) {
-    this.__cachedTerrain = undefined;
-    this.__name          = name;
-    this.__number        = number;
+function Chapter(chapterDefinition) {
+    this.__cachedTerrain     = undefined;
+    this.__chapterDefinition = chapterDefinition;
 }
 
 /**
@@ -15,7 +13,10 @@ function Chapter(name, number) {
  * @param {Coordinates}              playerCoordinates
  */
 Chapter.prototype.draw = function(context, playerCoordinates) {
-    // TODO
+    console.log(this.name());
+    // for (var index = 0; index < this.__terrain().length; index++) {
+    //     console.log(this.__terrain().sprite(index));
+    // }
 }
 
 /**
@@ -23,7 +24,7 @@ Chapter.prototype.draw = function(context, playerCoordinates) {
  * @return {string}
  */
 Chapter.prototype.name = function() {
-    return this.__name;
+    return this.__chapterDefinition.name();
 };
 
 /**
@@ -31,7 +32,7 @@ Chapter.prototype.name = function() {
  * @return {integer}
  */
 Chapter.prototype.number = function() {
-    return this.__number;
+    return this.__chapterDefinition.number();
 }
 
 /**
@@ -43,7 +44,7 @@ Chapter.prototype.__terrain = function() {
         return this.__cachedTerrain;
     }
 
-    this.__cachedTerrain = [];
+    this.__cachedTerrain = new Terrain(10, '1111111111100000006110023040611111111111');
 
     return this.__cachedTerrain;
 };

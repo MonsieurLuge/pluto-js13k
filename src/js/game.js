@@ -92,8 +92,8 @@ Game.prototype.__environment = function(livingEntityIndex) {
  * @param {string} mode
  */
 Game.prototype.__loop = function(mode) {
-    if (this.__state == 'run') {
-        if (mode != 'debug') { // TODO remove debug
+    if (this.__state === 'run') {
+        if (mode !== 'debug') { // TODO remove debug
             requestAnimationFrame(this.__loop.bind(this));
         }
 

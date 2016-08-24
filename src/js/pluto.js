@@ -41,7 +41,9 @@ var game = new Game(
         sceneHeight
     ),
     new Chapters([
-        new Chapter('the_awakening', 1)
+        new Chapter(
+            new ChapterOne()
+        )
     ]),
     new Player(
         undefined, // TODO add the mouse to the player,
