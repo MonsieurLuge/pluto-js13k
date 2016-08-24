@@ -1,5 +1,5 @@
 /**
- * ChapterOne object (ChapterOne is a Chapter)
+ * ChapterOne object (ChapterOne is a ChapterDefinition)
  */
 function ChapterOne() {
     this.__name   = 'The Awakening';

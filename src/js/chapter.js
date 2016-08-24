@@ -13,14 +13,13 @@ function Chapter(chapterDefinition) {
  * @param {Coordinates}              playerCoordinates
  */
 Chapter.prototype.draw = function(context, playerCoordinates) {
-    console.log(this.name());
     // for (var index = 0; index < this.__terrain().length; index++) {
     //     console.log(this.__terrain().sprite(index));
     // }
 }
 
 /**
- * Returns the chapter name
+ * Returns the chapter's name
  * @return {string}
  */
 Chapter.prototype.name = function() {
@@ -28,7 +27,7 @@ Chapter.prototype.name = function() {
 };
 
 /**
- * Returns the chapter number
+ * Returns the chapter's number
  * @return {integer}
  */
 Chapter.prototype.number = function() {
