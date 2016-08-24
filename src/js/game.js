@@ -7,7 +7,6 @@
 function Game(scene, buffer, chapters, player) {
     this.__buffer         = buffer;
     this.__chapters       = chapters;
-    this.__keyboard       = undefined; // TODO add keyboard to the game
     this.__livingEntities = [];
     this.__player         = player;
     this.__scene          = scene;
