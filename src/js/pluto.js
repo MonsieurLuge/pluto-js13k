@@ -42,7 +42,7 @@ var game = new Game(
     ),
     new Chapters([
         new Chapter(
-            new ChapterOne()
+            new ChapterOne('elevator to the surface')
         )
     ]),
     new Player(

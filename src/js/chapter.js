@@ -3,9 +3,33 @@
  * @param {Chapter} Chapter definition
  */
 function Chapter(chapterDefinition) {
+    this.__cachedRoom        = undefined;
     this.__chapterDefinition = chapterDefinition;
+    this.__currentRoom       = undefined;
 }
 
+/**
+ * Returns the current room
+ * @return {Room}
+ * @throws {string}
+ */
+Chapter.prototype.currentRoom = function() {
+    if (this.__cachedRoom) {
+        return this.__cachedRoom;
+    }
+
+    this.__currentRoom = this.__chapterDefinition.startingRoom();
+
+    for (var index = 0; index < this.__chapterDefinition.rooms().length; index++) {
+        if (this.__chapterDefinition.rooms()[index].name() === this.__currentRoom) {
+            this.__cachedRoom = this.__chapterDefinition.rooms()[index];
+
+            return this.currentRoom();
+        }
+    }
+
+    throw 'the room "' + this.__currentRoom + '" does\'nt exist';
+}
 /**
  * Returns the chapter's name
  * @return {string}

@@ -116,7 +116,7 @@ Game.prototype.__loop = function(mode) {
  */
 Game.prototype.__render = function() {
     // draw the terrain
-    this.__chapters.current().terrain().draw(
+    this.__chapters.current().currentRoom().draw(
         this.__buffer.context2d(),
         this.__player.coordinates()
     );
