@@ -58,7 +58,7 @@ Engineer.prototype.nextAction = function(environment) {
 /**
  * Take the item and put it into the inventory
  * @param  {Item} item
- * @throws message
+ * @throws {string}
  */
 Engineer.prototype.take = function(item) {
     if (this.inventory.length >= 10) {
