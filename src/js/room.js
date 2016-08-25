@@ -1,9 +1,13 @@
 /**
  * Room object
- * @param {string} name
+ * @param {string}  name
+ * @param {string}  type
+ * @param {Terrain} terrain
  */
-function Room(name) {
-    this.__name = name;
+function Room(name, type, terrain) {
+    this.__name    = name;
+    this.__terrain = terrain;
+    this.__type    = type;
 }
 
 /**
@@ -16,9 +20,17 @@ Room.prototype.draw = function(context, coordinates) {
 }
 
 /**
- * Returns the room name
+ * Returns the room's name
  * @return {string}
  */
 Room.prototype.name = function() {
     return this.__name;
+}
+
+/**
+ * Returns the room's type
+ * @return {string}
+ */
+Room.prototype.type = function() {
+    return this.__type;
 }

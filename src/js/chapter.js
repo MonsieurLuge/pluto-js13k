@@ -18,7 +18,7 @@ Chapter.prototype.currentRoom = function() {
         return this.__cachedRoom;
     }
 
-    this.__currentRoom = this.__chapterDefinition.startingRoom();
+    this.__currentRoom = this.__chapterDefinition.chapterMap().entrance();
 
     for (var index = 0; index < this.__chapterDefinition.rooms().length; index++) {
         if (this.__chapterDefinition.rooms()[index].name() === this.__currentRoom) {

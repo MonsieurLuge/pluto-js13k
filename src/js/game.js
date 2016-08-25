@@ -116,10 +116,10 @@ Game.prototype.__loop = function(mode) {
  */
 Game.prototype.__render = function() {
     // draw the terrain
-    this.__chapters.current().currentRoom().draw(
-        this.__buffer.context2d(),
-        this.__player.coordinates()
-    );
+    // this.__chapters.current().currentRoom().draw(
+    //     this.__buffer.context2d(),
+    //     this.__player.coordinates()
+    // );
 
     // draw the "static" entities
     for (var index = 0; index < this.__staticEntities.length; index++) {

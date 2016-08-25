@@ -42,7 +42,22 @@ var game = new Game(
     ),
     new Chapters([
         new Chapter(
-            new ChapterOne('elevator to the surface')
+            new ChapterOne(
+                new ChapterMap(
+                    new Rooms(
+                        new Room(
+                            'elevator to the surface',
+                            'entrance',
+                            new Terrain(0, [])
+                        ),
+                        new Room(
+                            'laboratory access',
+                            'exit',
+                            new Terrain(0, [])
+                        )
+                    )
+                )
+            )
         )
     ]),
     new Player(

@@ -1,11 +1,19 @@
 /**
  * ChapterOne object (ChapterOne is a ChapterDefinition)
+ * @param {ChapterMap} chapterMap
  */
-function ChapterOne(startingRoom) {
-    this.__cachedRooms  = undefined;
-    this.__name         = 'The Awakening';
-    this.__number       = 1;
-    this.__startingRoom = startingRoom;
+function ChapterOne(chapterMap) {
+    this.__chapterMap = chapterMap;
+    this.__name       = 'The Awakening';
+    this.__number     = 1;
+}
+
+/**
+ * Returns the chapterMap
+ * @return {ChapterMap}
+ */
+ChapterOne.prototype.chapterMap = function() {
+    return this.__chapterMap;
 }
 
 /**
@@ -22,37 +30,4 @@ ChapterOne.prototype.name = function() {
  */
 ChapterOne.prototype.number = function() {
     return this.__number;
-}
-
-/**
- * Returns the rooms
- * @return {array}
- */
-ChapterOne.prototype.rooms = function() {
-    if (this.__cachedRooms) {
-        return this.__cachedRooms;
-    }
-
-    this.__cachedRooms = this.__initRooms();
-
-    return this.rooms();
-}
-
-/**
- * Returns the name of the starting room
- * @return {string}
- */
-ChapterOne.prototype.startingRoom = function() {
-    return this.__startingRoom;
-}
-
-/**
- * Adds the rooms to the chapter
- * TODO move this to pluto.js
- * @return {array}
- */
-ChapterOne.prototype.__initRooms = function() {
-    return [
-        new Room('elevator to the surface')
-    ];
 }
