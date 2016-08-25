@@ -44,7 +44,7 @@ var game = new Game(
         new Chapter(
             new ChapterOne(
                 new ChapterMap(
-                    new Rooms(
+                    new Rooms([
                         new Room(
                             'elevator to the surface',
                             'entrance',
@@ -55,7 +55,7 @@ var game = new Game(
                             'exit',
                             new Terrain(0, [])
                         )
-                    )
+                    ])
                 )
             )
         )

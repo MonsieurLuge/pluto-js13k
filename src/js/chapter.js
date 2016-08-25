@@ -45,11 +45,3 @@ Chapter.prototype.name = function() {
 Chapter.prototype.number = function() {
     return this.__chapterDefinition.number();
 }
-
-/**
- * Returns the chapter's terrain
- * @return {Terrain}
- */
-Chapter.prototype.terrain = function() {
-    return new Terrain(10, '1111111111100000006110023040611111111111');
-}
