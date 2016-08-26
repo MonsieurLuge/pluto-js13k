@@ -8,13 +8,22 @@ function Scene(canvas, background) {
 }
 
 /**
+ * Draws the scene + post-process
+ * @param  {Canvas} buffer
+ */
+Scene.prototype.draw = function(buffer) {
+    // draw the background
+    this.__background.draw(buffer);
+
+    // post-process
+    // TODO post-process
+}
+
+/**
  * Draws the given buffer into the scene's canvas
  * @param {Canvas} buffer
  */
 Scene.prototype.scaleBuffer = function(buffer) {
-    // draw the background
-    this.__background.draw(this.__canvas);
-
     // stretch the given buffer
     this.__canvas.context2d().drawImage(
         buffer.canvas(),

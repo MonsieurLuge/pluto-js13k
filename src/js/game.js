@@ -119,6 +119,9 @@ Game.prototype.__render = function() {
         this.__player.coordinates()
     );
 
+    // background and post-process
+    this.__scene.draw(this.__buffer);
+
     // send the resulting image to the scene
     this.__scene.scaleBuffer(this.__buffer);
 }
