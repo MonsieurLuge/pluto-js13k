@@ -1,35 +1,46 @@
 /**
  * Scene object
- * @param {Canvas} canvas
+ * @param {Canvas} finalCanvas
+ * @param {Canvas} buffer
+ * @param {Canvas} background
  */
-function Scene(canvas, background) {
-    this.__background = background;
-    this.__canvas     = canvas;
+function Scene(finalCanvas, buffer, background) {
+    this.__background  = background;
+    this.__buffer      = buffer;
+    this.__finalCanvas = finalCanvas;
 }
 
 /**
- * Draws the scene + post-process
- * @param  {Canvas} buffer
+ * Returns the buffer
  */
-Scene.prototype.draw = function(buffer) {
+Scene.prototype.buffer = function() {
+    return this.__buffer;
+}
+
+/**
+ * Draws the scene + post-process + scale
+ */
+Scene.prototype.draw = function() {
     // draw the background
-    this.__background.draw(buffer);
+    this.__background.draw(this.__buffer);
 
     // post-process
     // TODO post-process
+
+    // scale
+    this.__scaleBuffer();
 }
 
 /**
- * Draws the given buffer into the scene's canvas
- * @param {Canvas} buffer
+ * Scale the buffer to fit the final canvas
  */
-Scene.prototype.scaleBuffer = function(buffer) {
+Scene.prototype.__scaleBuffer = function() {
     // stretch the given buffer
-    this.__canvas.context2d().drawImage(
-        buffer.canvas(),
+    this.__finalCanvas.context2d().drawImage(
+        this.__buffer.canvas(),
         0,
         0,
-        this.__canvas.size().width(),
-        this.__canvas.size().height()
+        this.__finalCanvas.size().width(),
+        this.__finalCanvas.size().height()
     );
 }

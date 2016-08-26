@@ -21,21 +21,23 @@ var game = new Game(
                 window.innerHeight
             )
         ),
+        new Canvas(
+            'buffer',
+            new Size(
+                sceneWidth,
+                sceneHeight
+            )
+        ),
         new Background(
             new Canvas(
                 'background',
-                new Size(
+                new MaxSizeRatio(
                     sceneWidth,
-                    sceneHeight
+                    sceneHeight,
+                    window.innerWidth,
+                    window.innerHeight
                 )
             )
-        )
-    ),
-    new Canvas(
-        'buffer',
-        new Size(
-            sceneWidth,
-            sceneHeight
         )
     ),
     new Chapters([

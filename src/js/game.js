@@ -1,12 +1,10 @@
 /**
  * Game object
  * @param {Scene}    scene
- * @param {Canvas}   buffer
  * @param {Chapters} chapters
  * @param {Player}   player
  */
-function Game(scene, buffer, chapters, player) {
-    this.__buffer   = buffer;
+function Game(scene, chapters, player) {
     this.__chapters = chapters;
     this.__player   = player;
     this.__scene    = scene;
@@ -115,13 +113,10 @@ Game.prototype.__loop = function(mode) {
 Game.prototype.__render = function() {
     // draw the room
     this.__chapters.current().currentRoom().draw(
-        this.__buffer.context2d(),
+        this.__scene.buffer().context2d(),
         this.__player.coordinates()
     );
 
-    // background and post-process
-    this.__scene.draw(this.__buffer);
-
-    // send the resulting image to the scene
-    this.__scene.scaleBuffer(this.__buffer);
+    // background, post-process and scaling
+    this.__scene.draw();
 }
