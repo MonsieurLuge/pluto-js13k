@@ -1,10 +1,11 @@
 /**
  * Terrain object
  * @param {integer} width
- * @param {string} content // TODO use bytes instead
+ * @param {string}  content // TODO use bytes instead
  */
-function Terrain(width, content) {
+function Terrain(width, height, content) {
     this.__content = content;
+    this.__height  = height;
     this.__width   = width;
 }
 
@@ -29,4 +30,20 @@ Terrain.prototype.content = function() {
  */
 Terrain.prototype.draw = function(context, coordinates) {
     // TODO draw the terrain
+}
+
+/**
+ * Returns the height
+ * @return {integer}
+ */
+Terrain.prototype.height = function() {
+    return this.__height;
+}
+
+/**
+ * Returns the width
+ * @return {string}
+ */
+Terrain.prototype.width = function() {
+    return this.__width;
 }

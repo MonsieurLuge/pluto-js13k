@@ -16,6 +16,15 @@ ChapterMap.prototype.entrance = function() {
 }
 
 /**
+ * Returns the named room
+ * @param  {string}
+ * @return {Room}
+ */
+ChapterMap.prototype.room = function(roomName) {
+    return this.__rooms.roomByName(roomName);
+}
+
+/**
  * Creates the map
  */
 ChapterMap.prototype.__createMap = function() {

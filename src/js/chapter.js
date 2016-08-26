@@ -3,9 +3,8 @@
  * @param {Chapter} Chapter definition
  */
 function Chapter(chapterDefinition) {
-    this.__cachedRoom        = undefined;
     this.__chapterDefinition = chapterDefinition;
-    this.__currentRoom       = undefined;
+    this.__currentRoomName   = undefined;
 }
 
 /**
@@ -14,22 +13,15 @@ function Chapter(chapterDefinition) {
  * @throws {string}
  */
 Chapter.prototype.currentRoom = function() {
-    if (this.__cachedRoom) {
-        return this.__cachedRoom;
+    if (this.__currentRoomName) {
+        return this.__chapterDefinition.chapterMap().room(this.__currentRoomName);
     }
 
-    this.__currentRoom = this.__chapterDefinition.chapterMap().entrance();
+    this.__currentRoomName = this.__chapterDefinition.chapterMap().entrance().name();
 
-    for (var index = 0; index < this.__chapterDefinition.rooms().length; index++) {
-        if (this.__chapterDefinition.rooms()[index].name() === this.__currentRoom) {
-            this.__cachedRoom = this.__chapterDefinition.rooms()[index];
-
-            return this.currentRoom();
-        }
-    }
-
-    throw 'the room "' + this.__currentRoom + '" does\'nt exist';
+    return this.currentRoom();
 }
+
 /**
  * Returns the chapter's name
  * @return {string}
