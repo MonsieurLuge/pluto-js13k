@@ -23,10 +23,3 @@ ChapterMap.prototype.entrance = function() {
 ChapterMap.prototype.room = function(roomName) {
     return this.__rooms.roomByName(roomName);
 }
-
-/**
- * Creates the map
- */
-ChapterMap.prototype.__createMap = function() {
-    // TODO create map
-}
