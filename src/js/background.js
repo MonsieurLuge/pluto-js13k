@@ -21,13 +21,13 @@ Background.prototype.clear = function() {
  * @param {Canvas} canvas
  */
 Background.prototype.draw = function(canvas) {
-    if (this.__cache == true) {
+    if (this.__cache === true) {
         canvas.context2d().drawImage(
             this.__canvas.canvas(),
             0,
             0,
-            canvas.width(),
-            canvas.height()
+            canvas.size().width(),
+            canvas.size().height()
         );
 
         return;

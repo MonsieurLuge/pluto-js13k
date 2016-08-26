@@ -13,7 +13,7 @@ function Size(width, height) {
  * @return {integer}
  */
 Size.prototype.height = function() {
-    return this.__height;
+    return Math.floor(this.__height);
 }
 
 /**
@@ -21,5 +21,5 @@ Size.prototype.height = function() {
  * @return {integer}
  */
 Size.prototype.width = function() {
-    return this.__width;
+    return Math.floor(this.__width);
 }
