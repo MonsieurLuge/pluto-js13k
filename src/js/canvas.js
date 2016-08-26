@@ -1,14 +1,13 @@
 /**
  * Canvas object
- * @param {integer} width
- * @param {integer} height
+ * @param {string} name
+ * @param {Size}   size
  */
-function Canvas(name, width, height) {
+function Canvas(name, size) {
     this.__cachedCanvas    = undefined;
     this.__cached2dContext = undefined;
-    this.__height          = height;
     this.__name            = name;
-    this.__width           = width;
+    this.__size            = size;
 }
 
 /**
@@ -27,8 +26,8 @@ Canvas.prototype.canvas = function() {
         this.__cachedCanvas.id = this.__name;
     }
 
-    this.__cachedCanvas.height = this.__height;
-    this.__cachedCanvas.width  = this.__width;
+    this.__cachedCanvas.height = this.__size.height();
+    this.__cachedCanvas.width  = this.__size.width();
 
     return this.__cachedCanvas;
 }
@@ -48,19 +47,11 @@ Canvas.prototype.context2d = function() {
 }
 
 /**
- * Returns the canva's height
+ * Returns the canva's size
  * @return {integer}
  */
-Canvas.prototype.height = function () {
-    return this.__height;
-};
-
-/**
- * Returns the canva's width
- * @return {integer}
- */
-Canvas.prototype.width = function () {
-    return this.__width;
+Canvas.prototype.size = function () {
+    return this.__size;
 };
 
 /**

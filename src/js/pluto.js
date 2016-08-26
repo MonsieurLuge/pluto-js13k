@@ -14,13 +14,7 @@ var game = new Game(
     new Scene(
         new Canvas(
             'pluto',
-            new MaxWidthRatio(
-                sceneWidth,
-                sceneHeight,
-                window.innerWidth,
-                window.innerHeight
-            ),
-            new MaxHeightRatio(
+            new MaxSizeRatio(
                 sceneWidth,
                 sceneHeight,
                 window.innerWidth,
@@ -30,15 +24,19 @@ var game = new Game(
         new Background(
             new Canvas(
                 'background',
-                sceneWidth,
-                sceneHeight
+                new Size(
+                    sceneWidth,
+                    sceneHeight
+                )
             )
         )
     ),
     new Canvas(
         'buffer',
-        sceneWidth,
-        sceneHeight
+        new Size(
+            sceneWidth,
+            sceneHeight
+        )
     ),
     new Chapters([
         new Chapter(

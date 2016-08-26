@@ -36,7 +36,7 @@ Background.prototype.draw = function(canvas) {
     // simple color
     this.__canvas.context2d().fillStyle = this.__plainColor;
     this.__canvas.context2d().beginPath();
-    this.__canvas.context2d().rect(0, 0, this.__canvas.width(), this.__canvas.height());
+    this.__canvas.context2d().rect(0, 0, this.__canvas.size().width(), this.__canvas.size().height());
     this.__canvas.context2d().fill();
 
     // random squares
@@ -45,10 +45,10 @@ Background.prototype.draw = function(canvas) {
     for (var index = 0; index < 100; index++) {
         this.__canvas.context2d().beginPath();
         this.__canvas.context2d().rect(
-            Math.floor(Math.random() * this.__canvas.width()) - 20,
-            Math.floor(Math.random() * this.__canvas.height()) - 20,
-            Math.floor(Math.random() * this.__canvas.width() / 2),
-            Math.floor(Math.random() * this.__canvas.height() / 2)
+            Math.floor(Math.random() * this.__canvas.size().width()) - 20,
+            Math.floor(Math.random() * this.__canvas.size().height()) - 20,
+            Math.floor(Math.random() * this.__canvas.size().width() / 2),
+            Math.floor(Math.random() * this.__canvas.size().height() / 2)
         );
         this.__canvas.context2d().fill();
     }

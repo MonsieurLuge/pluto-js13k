@@ -20,7 +20,7 @@ Scene.prototype.scaleBuffer = function(buffer) {
         buffer.canvas(),
         0,
         0,
-        this.__canvas.width(),
-        this.__canvas.height()
+        this.__canvas.size().width(),
+        this.__canvas.size().height()
     );
 }

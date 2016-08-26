@@ -24,19 +24,3 @@ MaxHeightRatio.prototype.valueOf = function() {
         )
     );
 }
-
-
-/**
- * Scale the scene to fit the screen on each window update
- */
-// Game.prototype.__scaleScene = function() {
-//     minScaleValue = Math.min(
-//         window.innerWidth / this.sceneWidth,
-//         window.innerHeight / this.sceneHeight
-//     );
-//
-//     this.canvas.width  = this.sceneWidth * minScaleValue;
-//     this.canvas.height = this.sceneHeight * minScaleValue;
-//
-//     this.context.scale(minScaleValue, minScaleValue);
-// }
