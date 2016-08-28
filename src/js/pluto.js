@@ -47,12 +47,12 @@ var game = new Game(
                     new Room(
                         'elevator to the surface',
                         'entrance',
-                        new Biome('elevator')
+                        new ElevatorBiome()
                     ),
                     new Room(
                         'laboratory access',
                         'exit',
-                        new Biome('scanner')
+                        new ScannerBiome()
                     )
                 ])
             )
