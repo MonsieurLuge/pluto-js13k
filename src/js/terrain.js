@@ -1,12 +1,14 @@
 /**
  * Terrain object
- * @param {integer} width
- * @param {string}  content // TODO use bytes instead
+ * @param {Biome} biome
+ * @param {array} shape
+ * @param {Exits} exits
  */
-function Terrain(width, height, content) {
-    this.__content = content;
-    this.__height  = height;
-    this.__width   = width;
+function Terrain(biome, shape, exits) {
+    this.__cachedContent = undefined;
+    this.__biome         = biome;
+    this.__exists        = exits;
+    this.__shape         = shape;
 }
 
 /**
@@ -14,13 +16,13 @@ function Terrain(width, height, content) {
  * @return {array}
  */
 Terrain.prototype.content = function() {
-    // var arrayContent = [];
-    //
-    // for (var index = 0; index < this.__content.length; index++) {
-    //     // TODO
-    // }
-    //
-    // return arrayContent;
+    if (this.__cachedContent) {
+        return this.__content;
+    }
+
+    this.__generateContent();
+
+    return this.content();
 }
 
 /**
@@ -33,17 +35,9 @@ Terrain.prototype.draw = function(context, coordinates) {
 }
 
 /**
- * Returns the height
- * @return {integer}
+ * Generates the terrain
  */
-Terrain.prototype.height = function() {
-    return this.__height;
-}
-
-/**
- * Returns the width
- * @return {string}
- */
-Terrain.prototype.width = function() {
-    return this.__width;
+Terrain.prototype.__generateContent = function() {
+    // TODO generate Terrain content
+    this.__cachedContent = [];
 }
