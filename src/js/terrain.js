@@ -7,7 +7,7 @@
 function Terrain(biome, shape, exits) {
     this.__cachedContent = undefined;
     this.__biome         = biome;
-    this.__exists        = exits;
+    this.__exits         = exits;
     this.__shape         = shape;
 }
 
