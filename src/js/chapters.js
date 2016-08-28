@@ -19,7 +19,7 @@ Chapters.prototype.current = function() {
     }
 
     for (var index = 0; index < this.__chapters.length; index++) {
-        if (this.__chapters[index].number() == this.__currentChapter) {
+        if (this.__chapters[index].number() === this.__currentChapter) {
             this.__cachedCurrentChapter = this.__chapters[index];
 
             return this.__cachedCurrentChapter;

@@ -41,22 +41,20 @@ var game = new Game(
         )
     ),
     new Chapters([
-        new Chapter(
-            new ChapterOne(
-                new ChapterMap(
-                    new Rooms([
-                        new Room(
-                            'elevator to the surface',
-                            'entrance',
-                            new Biome('elevator')
-                        ),
-                        new Room(
-                            'laboratory access',
-                            'exit',
-                            new Biome('scanner')
-                        )
-                    ])
-                )
+        new ChapterOne(
+            new ChapterMap(
+                new Rooms([
+                    new Room(
+                        'elevator to the surface',
+                        'entrance',
+                        new Biome('elevator')
+                    ),
+                    new Room(
+                        'laboratory access',
+                        'exit',
+                        new Biome('scanner')
+                    )
+                ])
             )
         )
     ]),

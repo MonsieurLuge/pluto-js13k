@@ -1,11 +1,12 @@
 /**
- * ChapterOne object (ChapterOne is a ChapterDefinition)
+ * ChapterOne object (ChapterOne is a Chapter)
  * @param {ChapterMap} chapterMap
  */
 function ChapterOne(chapterMap) {
-    this.__chapterMap = chapterMap;
-    this.__name       = 'The Awakening';
-    this.__number     = 1;
+    this.__chapterMap      = chapterMap;
+    this.__currentRoomName = undefined;
+    this.__name            = 'The Awakening';
+    this.__number          = 1;
 }
 
 /**
@@ -14,6 +15,21 @@ function ChapterOne(chapterMap) {
  */
 ChapterOne.prototype.chapterMap = function() {
     return this.__chapterMap;
+}
+
+/**
+ * Returns the current room
+ * @return {Room}
+ * @throws {string}
+ */
+ChapterOne.prototype.currentRoom = function() {
+    if (this.__currentRoomName) {
+        return this.__chapterMap.room(this.__currentRoomName);
+    }
+
+    this.__currentRoomName = this.__chapterMap.entrance().name();
+
+    return this.currentRoom();
 }
 
 /**
