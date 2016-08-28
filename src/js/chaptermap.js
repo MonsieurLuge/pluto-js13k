@@ -1,6 +1,6 @@
 /**
  * ChapterMap object
- * @param {Rooms} rooms
+ * @param {Rooms}   rooms
  * @param {MapTree} mapTree
  */
 function ChapterMap(rooms, mapTree) {
@@ -31,8 +31,25 @@ ChapterMap.prototype.room = function(roomName) {
 }
 
 /**
- * Generates the map
+ * Generates the chapter's map
  */
 ChapterMap.prototype.__generate = function() {
-    // TODO generate map
+    this.__generateTree();
+    this.__generateMap();
+}
+
+/**
+ * Generates the map
+ */
+ChapterMap.prototype.__generateMap = function() {
+    // TODO define the rooms size & assemble them
+}
+
+/**
+ * Generates the map's tree
+ */
+ChapterMap.prototype.__generateTree = function() {
+    var maxDepth = Math.floor(this.__rooms / 2) + 1;
+
+    // TODO first, make a way to the exit
 }
