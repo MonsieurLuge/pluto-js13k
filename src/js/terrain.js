@@ -1,14 +1,12 @@
 /**
  * Terrain object
  * @param {Biome} biome
- * @param {array} shape
- * @param {Exits} exits
  */
-function Terrain(biome, shape, exits) {
+function Terrain(biome) {
     this.__cachedContent  = undefined;
     this.__biome          = biome;
-    this.__exits          = exits;
-    this.__shape          = shape;
+    this.__exits          = [];
+    this.__shape          = [];
     // woul'd be better in a secondary ctor, but not available in JS :/
     this.__staticEntities = new Entities();
 }
@@ -29,8 +27,8 @@ Terrain.prototype.content = function() {
 
 /**
  * Draws the terrain
- * @param  {CanvasRenderingContext2D} context
- * @param  {Coordinates}              coordinates
+ * @param {CanvasRenderingContext2D} context
+ * @param {Coordinates}              coordinates
  */
 Terrain.prototype.draw = function(context, coordinates) {
     // TODO draw the terrain
@@ -38,8 +36,10 @@ Terrain.prototype.draw = function(context, coordinates) {
 
 /**
  * Generates the terrain
+ * @param {array} shape
+ * @param {array} exits // TODO Exits object ?
  */
-Terrain.prototype.__generateContent = function() {
+Terrain.prototype.generate = function(shape, exits) {
     // TODO generate Terrain content
     this.__cachedContent = [];
 }
