@@ -58,7 +58,8 @@ var game = new Game(
                             new ScannerBiome()
                         )
                     )
-                ])
+                ]),
+                new TreeNode('entrance')
             )
         )
     ]),

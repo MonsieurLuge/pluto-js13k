@@ -55,6 +55,7 @@ var gulp          = require('gulp'),
             'src/js/size.js',
             'src/js/targetposition.js',
             'src/js/terrain.js',
+            'src/js/treenode.js',
             'src/js/pluto.js'
         ],
         mainHtml: [
