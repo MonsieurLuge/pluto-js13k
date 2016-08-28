@@ -35,6 +35,7 @@ var gulp          = require('gulp'),
         js: [
             'src/js/ai.js',
             'src/js/background.js',
+            'src/js/biome.js',
             'src/js/canvas.js',
             'src/js/chapter.js',
             'src/js/chaptermap.js',
