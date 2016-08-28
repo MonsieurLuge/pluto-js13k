@@ -14,15 +14,14 @@ function Terrain(biome) {
 /**
  * Returns the content
  * @return {array}
+ * @throws {string}
  */
 Terrain.prototype.content = function() {
     if (this.__cachedContent) {
-        return this.__content;
+        return this.__cachedContent;
     }
 
-    this.__generateContent();
-
-    return this.content();
+    throw 'the terrain is not built, don\'t forget to use the "generate" method';
 }
 
 /**
