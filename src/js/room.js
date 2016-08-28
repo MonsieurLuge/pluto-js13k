@@ -1,15 +1,15 @@
 /**
  * Room object
- * @param {string} name
- * @param {string} roomType
- * @param {Biome}  biome
+ * @param {string}  name
+ * @param {string}  roomType
+ * @param {Terrain} terrain
  */
-function Room(name, roomType, biome) {
+function Room(name, roomType, terrain) {
     this.__name           = name;
     this.__roomType       = roomType;
+    this.__terrain        = terrain;
     // woul'd be better in a secondary ctor, but not available in JS :/
     this.__livingEntities = new Entities();
-    this.__terrain        = new Terrain(biome);
 }
 
 /**
