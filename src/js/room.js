@@ -2,15 +2,15 @@
  * Room object
  * @param {string} name
  * @param {string} roomType
- * @param {string} biomeType
+ * @param {Biome}  biome
  */
-function Room(name, roomType, biomeType) {
-    this.__biomeType      = biomeType;
+function Room(name, roomType, biome) {
     this.__name           = name;
-    this.__livingEntities = new Entities();
     this.__roomType       = roomType;
+    // woul'd be better in a secondary ctor, but not available in JS :/
+    this.__livingEntities = new Entities();
     this.__staticEntities = new Entities();
-    this.__terrain        = undefined;
+    this.__terrain        = new Terrain(biome);
 }
 
 /**
@@ -43,13 +43,7 @@ Room.prototype.name = function() {
  * @return {Terrain}
  */
 Room.prototype.terrain = function() {
-    if (this.__terrain) {
-        return this.__terrain;
-    }
-
-    this.__createTerrain();
-
-    return this.terrain();
+    return this.__terrain;
 }
 
 /**
@@ -58,17 +52,4 @@ Room.prototype.terrain = function() {
  */
 Room.prototype.type = function() {
     return this.__roomType;
-}
-
-/**
- * Creates the room's terrain
- */
-Room.prototype.__createTerrain = function() {
-    var content = '1111111' +
-                  '1     1' +
-                  '1  1  1' +
-                  '1 11 11' +
-                  '1111111';
-
-    this.__terrain = new Terrain(7, 5, content);
 }
