@@ -9,7 +9,6 @@ function Room(name, roomType, biome) {
     this.__roomType       = roomType;
     // woul'd be better in a secondary ctor, but not available in JS :/
     this.__livingEntities = new Entities();
-    this.__staticEntities = new Entities();
     this.__terrain        = new Terrain(biome);
 }
 

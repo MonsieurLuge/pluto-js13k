@@ -5,10 +5,12 @@
  * @param {Exits} exits
  */
 function Terrain(biome, shape, exits) {
-    this.__cachedContent = undefined;
-    this.__biome         = biome;
-    this.__exits         = exits;
-    this.__shape         = shape;
+    this.__cachedContent  = undefined;
+    this.__biome          = biome;
+    this.__exits          = exits;
+    this.__shape          = shape;
+    // woul'd be better in a secondary ctor, but not available in JS :/
+    this.__staticEntities = new Entities();
 }
 
 /**
