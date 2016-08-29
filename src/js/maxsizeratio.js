@@ -6,13 +6,8 @@
  * @param {integer} wrapperHeight
  */
 function MaxSizeRatio(width, height, wrapperWidth, wrapperHeight) {
-    // this.__height        = height;
-    // this.__width         = width;
-    // this.__wrapperHeight = wrapperHeight;
-    // this.__wrapperWidth  = wrapperWidth;
-
-    // unfortunately, there is no method overloading in JS :/
-    this.__size          = new Size(
+    // should be in a secondary ctor, but not available in JS
+    this.__size = new Size(
         new MaxWidthRatio(
             width,
             height,

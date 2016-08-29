@@ -11,10 +11,10 @@ function TreeNode(name, parent = undefined) {
 
 /**
  * Adds a leaf
- * @param {TreeNode} leaf
+ * @param {string} leafName
  */
-TreeNode.prototype.addLeaf = function(leaf) {
-    this.__leaves.push(leaf);
+TreeNode.prototype.addLeaf = function(leafName) {
+    this.__leaves.push(new TreeNode(leafName, this));
 }
 
 /**
@@ -52,17 +52,17 @@ TreeNode.prototype.parent = function() {
  * @throws {string}
  */
 TreeNode.prototype.removeLeaf = function(leafName) {
-    for (var index = 0; index < this.__leaves; index++) {
+    for (var index = 0; index < this.__leaves.length; index++) {
         // TODO rewrite this test
         if (
-            this.__leaves[index].name === leafName
+            this.__leaves[index].name() === leafName
             && this.__leaves[index].leaves() === 0
         ) {
             this.__leaves.splice(index, 1);
             return;
         }
 
-        if (this.__leaves[index].name === leafName) {
+        if (this.__leaves[index].name() === leafName) {
             throw 'cannot remove the leaf "' + leafName + '" from the node "' + this.__name + '" -> it\'s a node'
         }
     }

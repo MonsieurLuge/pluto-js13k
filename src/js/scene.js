@@ -35,7 +35,6 @@ Scene.prototype.draw = function() {
  * Scale the buffer to fit the final canvas
  */
 Scene.prototype.__scaleBuffer = function() {
-    // stretch the given buffer
     this.__finalCanvas.context2d().drawImage(
         this.__buffer.canvas(),
         0,
