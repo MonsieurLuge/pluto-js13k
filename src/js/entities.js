@@ -15,14 +15,14 @@ Entities.prototype.addEntity = function(entity) {
 }
 
 /**
- * Remove an entity
+ * Removes an entity by its name
  * @param  {string} name
  * @throws {string}
  */
 Entities.prototype.removeEntity = function(name) {
     for (var index = 0; index < this.__entities.length; index++) {
         if (this.__entities[index].name() === name) {
-            this.__entities.slice(index, 1);
+            this.__entities.splice(index, 1);
             return;
         }
     }
