@@ -4,6 +4,7 @@
  * @param {TreeNode} parent
  */
 function TreeNode(name, parent = undefined) {
+    this.__depth  = 0;
     this.__leaves = [];
     this.__name   = name;
     this.__parent = parent;
@@ -15,6 +16,19 @@ function TreeNode(name, parent = undefined) {
  */
 TreeNode.prototype.addLeaf = function(leafName) {
     this.__leaves.push(new TreeNode(leafName, this));
+}
+
+/**
+ * Returns the depth (root is 0)
+ * @return {integer}
+ */
+TreeNode.prototype.depth = function() {
+    try {
+        return this.parent().depth();
+    } catch (message) {
+        // no parent found ? so it's the root one
+        return 0;
+    }
 }
 
 /**
