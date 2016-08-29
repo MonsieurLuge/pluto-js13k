@@ -49,7 +49,38 @@ ChapterMap.prototype.__generateMap = function() {
  * Generates the map's tree
  */
 ChapterMap.prototype.__generateTree = function() {
-    var maxDepth = Math.floor(this.__rooms / 2) + 1;
+    var currentNode = this.__tree;
 
-    // TODO first, make a way to the exit
+    // max depth of the tree and distance between entrance & exit
+    var maxDepth = Math.floor(this.__rooms.rooms().length / 2);
+
+    // which rooms, that are not the entrance & exit ones, are not in the tree
+    var roomsLeft = [];
+
+    for (var index = 0; index < this.__rooms.rooms().length ; index++) {
+        if (
+            this.__rooms.rooms()[index].type() !== 'exit'
+            && this.__rooms.rooms()[index].type() !== 'entrance'
+        ) {
+            roomsLeft.push(this.__rooms.rooms()[index].name());
+        }
+    }
+
+    // add randomly the other rooms in the tree, straight to the exit
+    while (currentNode.depth() < maxDepth - 1) {
+        var index        = Math.floor(Math.random() * roomsLeft.length);
+        var nextRoomName = roomsLeft[index];
+
+        currentNode.add(roomsLeft[index]);
+        roomsLeft.splice(index, 1);
+
+        currentNode = currentNode.childrenByName(nextRoomName);
+    }
+
+    // add the exit
+    var exitName = this.__rooms.roomByType('exit').name();
+    currentNode.add(exitName);
+    currentNode = currentNode.childrenByName(exitName);
+
+    // TODO add the others rooms
 }
