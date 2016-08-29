@@ -4,18 +4,23 @@
  * @param {TreeNode} parent
  */
 function TreeNode(name, parent = undefined) {
-    this.__depth  = 0;
-    this.__leaves = [];
-    this.__name   = name;
-    this.__parent = parent;
+    this.__depth     = 0;
+    this.__childrens = [];
+    this.__name      = name;
+    this.__parent    = parent;
 }
 
 /**
- * Adds a leaf
- * @param {string} leafName
+ * Adds a children
+ * @param {string} childName
  */
-TreeNode.prototype.addLeaf = function(leafName) {
-    this.__leaves.push(new TreeNode(leafName, this));
+TreeNode.prototype.addChildren = function(childName) {
+    this.__childrens.push(
+        new TreeNode(
+            childName,
+            this
+        )
+    );
 }
 
 /**
@@ -32,11 +37,11 @@ TreeNode.prototype.depth = function() {
 }
 
 /**
- * Returns the leaves
+ * Returns the node's childrens
  * @return {array}
  */
-TreeNode.prototype.leaves = function() {
-    return this.__leaves;
+TreeNode.prototype.childrens = function() {
+    return this.__childrens;
 }
 
 /**
@@ -61,25 +66,25 @@ TreeNode.prototype.parent = function() {
 }
 
 /**
- * Removes a leaf
- * @param {string} leafName
+ * Removes a children
+ * @param {string} childName
  * @throws {string}
  */
-TreeNode.prototype.removeLeaf = function(leafName) {
-    for (var index = 0; index < this.__leaves.length; index++) {
+TreeNode.prototype.removeChildren = function(childName) {
+    for (var index = 0; index < this.__childrens.length; index++) {
         // TODO rewrite this test
         if (
-            this.__leaves[index].name() === leafName
-            && this.__leaves[index].leaves() === 0
+            this.__childrens[index].name() === childName
+            && this.__childrens[index].leaves() === 0
         ) {
-            this.__leaves.splice(index, 1);
+            this.__childrens.splice(index, 1);
             return;
         }
 
-        if (this.__leaves[index].name() === leafName) {
-            throw 'cannot remove the leaf "' + leafName + '" from the node "' + this.__name + '" -> it\'s a node'
+        if (this.__childrens[index].name() === childName) {
+            throw 'cannot remove the child "' + childName + '" from the node "' + this.__name + '" -> it\'s a node'
         }
     }
 
-    throw 'cannot remove the leaf "' + leafName + '" from the node "' + this.__name + '" -> not found';
+    throw 'cannot remove the child "' + childName + '" from the node "' + this.__name + '" -> not found';
 }
