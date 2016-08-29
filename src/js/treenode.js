@@ -14,7 +14,7 @@ function TreeNode(name, parent = undefined) {
  * Adds a children
  * @param {string} childName
  */
-TreeNode.prototype.addChildren = function(childName) {
+TreeNode.prototype.add = function(childName) {
     this.__childrens.push(
         new TreeNode(
             childName,
@@ -70,7 +70,7 @@ TreeNode.prototype.parent = function() {
  * @param {string} childName
  * @throws {string}
  */
-TreeNode.prototype.removeChildren = function(childName) {
+TreeNode.prototype.remove = function(childName) {
     for (var index = 0; index < this.__childrens.length; index++) {
         // TODO rewrite this test
         if (
