@@ -29,7 +29,7 @@ TreeNode.prototype.add = function(childName) {
  */
 TreeNode.prototype.depth = function() {
     try {
-        return this.parent().depth();
+        return this.parent().depth() + 1;
     } catch (message) {
         // no parent found ? so it's the root one
         return 0;
@@ -42,6 +42,22 @@ TreeNode.prototype.depth = function() {
  */
 TreeNode.prototype.childrens = function() {
     return this.__childrens;
+}
+
+/**
+ * Returns a children
+ * @param {string} name
+ * @return {TreeNode}
+ * @throws {string}
+ */
+TreeNode.prototype.childrenByName = function(name) {
+    for (var index = 0; index < this.__childrens.length; index++) {
+        if (this.__childrens[index].name() === name) {
+            return this.__childrens[index];
+        }
+    }
+
+    throw 'cannot find the children named "' + name + '" for the node "' + this.__name + '"';
 }
 
 /**
