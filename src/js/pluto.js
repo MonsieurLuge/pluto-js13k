@@ -57,6 +57,27 @@ var game = new Game(
                         new Terrain(
                             new ScannerBiome()
                         )
+                    ),
+                    new Room(
+                        'test room 1',
+                        'common',
+                        new Terrain(
+                            new ElevatorBiome()
+                        )
+                    ),
+                    new Room(
+                        'test room 2',
+                        'common',
+                        new Terrain(
+                            new ScannerBiome()
+                        )
+                    ),
+                    new Room(
+                        'test room 3',
+                        'common',
+                        new Terrain(
+                            new ScannerBiome()
+                        )
                     )
                 ]),
                 new TreeNode('entrance')
