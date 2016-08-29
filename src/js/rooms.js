@@ -7,6 +7,37 @@ function Rooms(rooms) {
 }
 
 /**
+ * Adds a room (its name must be unique)
+ * @param {Room} room
+ * @throws {string}
+ */
+Rooms.prototype.add = function(room) {
+    try {
+        this.roomByName(room.name());
+    } catch (message) {
+        throw 'cannot add the room "' + room.name() + '" -> already stored';
+    }
+
+    this.__rooms.push(room);
+}
+
+/**
+ * Removes a room by its name
+ * @param  {string} name
+ * @throws {string}
+ */
+Rooms.prototype.remove = function(name) {
+    for (var index = 0; index < this.__rooms.length; index++) {
+        if (this.__rooms[index].name() === name) {
+            this.__rooms.slice(index, 1);
+            return;
+        }
+    }
+
+    throw 'cannot remove the room "' + name + '" -> not found';
+}
+
+/**
  * Returns the room by its name
  * @param  {string} roomName
  * @return {Room}
