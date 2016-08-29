@@ -22,14 +22,24 @@ Rooms.prototype.add = function(room) {
 }
 
 /**
+ * Returns the rooms
+ * TODO it seems to be "offensive"
+ * @return {Room[]}
+ */
+Rooms.prototype.rooms = function() {
+    return this.__rooms;
+}
+
+/**
  * Removes a room by its name
+ * TODO woul'd be better returning a new Rooms object
  * @param  {string} name
  * @throws {string}
  */
 Rooms.prototype.remove = function(name) {
     for (var index = 0; index < this.__rooms.length; index++) {
         if (this.__rooms[index].name() === name) {
-            this.__rooms.slice(index, 1);
+            this.__rooms.splice(index, 1);
             return;
         }
     }
