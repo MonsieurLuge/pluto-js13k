@@ -1,9 +1,9 @@
 /**
- * TreeNode object
- * @param {string}   name
- * @param {TreeNode} parent
+ * Node object
+ * @param {string} name
+ * @param {Node}   parent
  */
-function TreeNode(name, parent = undefined) {
+function Node(name, parent = undefined) {
     this.__depth     = 0;
     this.__childrens = [];
     this.__name      = name;
@@ -12,22 +12,17 @@ function TreeNode(name, parent = undefined) {
 
 /**
  * Adds a children
- * @param {string} childName
+ * @param {Node} node
  */
-TreeNode.prototype.add = function(childName) {
-    this.__childrens.push(
-        new TreeNode(
-            childName,
-            this
-        )
-    );
+Node.prototype.add = function(node) {
+    this.__childrens.push(node);
 }
 
 /**
  * Returns the depth (root is 0)
  * @return {integer}
  */
-TreeNode.prototype.depth = function() {
+Node.prototype.depth = function() {
     try {
         return this.parent().depth() + 1;
     } catch (message) {
@@ -40,17 +35,17 @@ TreeNode.prototype.depth = function() {
  * Returns the node's childrens
  * @return {array}
  */
-TreeNode.prototype.childrens = function() {
+Node.prototype.childrens = function() {
     return this.__childrens;
 }
 
 /**
  * Returns a children
  * @param {string} name
- * @return {TreeNode}
+ * @return {Node}
  * @throws {string}
  */
-TreeNode.prototype.childrenByName = function(name) {
+Node.prototype.childrenByName = function(name) {
     for (var index = 0; index < this.__childrens.length; index++) {
         if (this.__childrens[index].name() === name) {
             return this.__childrens[index];
@@ -64,16 +59,16 @@ TreeNode.prototype.childrenByName = function(name) {
  * Returns the name
  * @return {string}
  */
-TreeNode.prototype.name = function() {
+Node.prototype.name = function() {
     return this.__name;
 }
 
 /**
  * Returns the parent node
- * @return {TreeNode}
+ * @return {Node}
  * @throws {string}
  */
-TreeNode.prototype.parent = function() {
+Node.prototype.parent = function() {
     if (this.__parent) {
         return this.__parent;
     }
@@ -86,7 +81,7 @@ TreeNode.prototype.parent = function() {
  * @param {string} childName
  * @throws {string}
  */
-TreeNode.prototype.remove = function(childName) {
+Node.prototype.remove = function(childName) {
     for (var index = 0; index < this.__childrens.length; index++) {
         // TODO rewrite this test
         if (

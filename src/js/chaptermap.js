@@ -3,10 +3,13 @@
  * @param {Rooms}   rooms
  * @param {MapTree} mapTree
  */
-function ChapterMap(rooms, mapTree) {
+function ChapterMap(rooms) {
     this.__map   = [];
     this.__rooms = rooms;
-    this.__tree  = mapTree;
+    // should be in a secondary ctor, but not available in JS
+    this.__tree  = new Tree(
+        new Node(rooms.roomByType('entrance'))
+    );
 }
 
 /**
@@ -31,6 +34,44 @@ ChapterMap.prototype.room = function(roomName) {
 }
 
 /**
+ * Adds a room to the tree
+ * @param {string} roomName
+ * @param {float}  chanceToNewNode
+ */
+ChapterMap.prototype.__addRoomNode = function(roomName, chanceToNewNode, maxDepth) {
+    // max depth is reached
+    if (this.__tree.currentNode().depth() >= maxDepth) {
+        this.__tree.jumpToRoot();
+
+        this.__addRoomNode(roomName, chanceToNewNode + 0.1, maxDepth);
+    }
+
+    // create a new node
+    if (Math.random() < chanceToNewNode) {
+        this.__tree.addToCurrentAndJump(
+            new Node(
+                roomName,
+                this.__tree.currentNode()
+            )
+        );
+    } else {
+        var childrens = this.__tree.currentNode().childrens();
+
+        if (childrens.length === 0) {
+            // no children ? return to the root node
+            this.__tree.jumpToRoot();
+        } else {
+            // jump to a random children
+            var childrenIndex = Math.floor(Math.random() * childrens.length);
+
+            this.__tree.jumpToNode(childrens[childrenIndex].name());
+        }
+
+        this.__addRoomNode(roomName, chanceToNewNode + 0.1, maxDepth);
+    }
+}
+
+/**
  * Generates the chapter's map
  */
 ChapterMap.prototype.__generate = function() {
@@ -49,8 +90,6 @@ ChapterMap.prototype.__generateMap = function() {
  * Generates the map's tree
  */
 ChapterMap.prototype.__generateTree = function() {
-    var currentNode = this.__tree;
-
     // max depth of the tree and distance between entrance & exit
     var maxDepth = Math.floor(this.__rooms.rooms().length / 2);
 
@@ -67,20 +106,36 @@ ChapterMap.prototype.__generateTree = function() {
     }
 
     // add randomly the other rooms in the tree, straight to the exit
-    while (currentNode.depth() < maxDepth - 1) {
+    while (this.__tree.currentNode().depth() < maxDepth - 1) {
         var index        = Math.floor(Math.random() * roomsLeft.length);
         var nextRoomName = roomsLeft[index];
 
-        currentNode.add(roomsLeft[index]);
-        roomsLeft.splice(index, 1);
+        this.__tree.addToCurrentAndJump(
+            new Node(
+                roomsLeft[index],
+                this.__tree.currentNode()
+            )
+        );
 
-        currentNode = currentNode.childrenByName(nextRoomName);
+        roomsLeft.splice(index, 1);
     }
 
     // add the exit
     var exitName = this.__rooms.roomByType('exit').name();
-    currentNode.add(exitName);
-    currentNode = currentNode.childrenByName(exitName);
 
-    // TODO add the others rooms
+    this.__tree.addToCurrent(exitName);
+
+    // add the others rooms
+    this.__tree.jumpToRoot();
+
+    while (roomsLeft.length > 0) {
+        var nextRoomIndex = Math.floor(Math.random() * roomsLeft.length);
+
+        this.__addRoomNode(roomsLeft[nextRoomIndex], 0.4, maxDepth);
+
+        roomsLeft.splice(nextRoomIndex, 1);
+    }
+
+    this.__tree.jumpToRoot();
+    console.log(this.__tree);
 }
