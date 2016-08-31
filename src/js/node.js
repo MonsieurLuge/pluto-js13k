@@ -75,27 +75,3 @@ Node.prototype.parent = function() {
 
     throw 'the node "' + this.name() + '" is the root -> cannot find it\'s parent';
 }
-
-/**
- * Removes a children
- * @param {string} childName
- * @throws {string}
- */
-Node.prototype.remove = function(childName) {
-    for (var index = 0; index < this.__childrens.length; index++) {
-        // TODO rewrite this test
-        if (
-            this.__childrens[index].name() === childName
-            && this.__childrens[index].leaves() === 0
-        ) {
-            this.__childrens.splice(index, 1);
-            return;
-        }
-
-        if (this.__childrens[index].name() === childName) {
-            throw 'cannot remove the child "' + childName + '" from the node "' + this.name() + '" -> it\'s a node'
-        }
-    }
-
-    throw 'cannot remove the child "' + childName + '" from the node "' + this.name() + '" -> not found';
-}
