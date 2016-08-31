@@ -35,22 +35,22 @@ ChapterMap.prototype.room = function(roomName) {
 
 /**
  * Adds a room to the tree
- * @param {string} roomName
+ * @param {Room} room
  * @param {float}  chanceToNewNode
  */
-ChapterMap.prototype.__addRoomNode = function(roomName, chanceToNewNode, maxDepth) {
+ChapterMap.prototype.__addRoomNode = function(room, chanceToNewNode, maxDepth) {
     // max depth is reached
     if (this.__tree.currentNode().depth() >= maxDepth) {
         this.__tree.jumpToRoot();
 
-        this.__addRoomNode(roomName, chanceToNewNode + 0.1, maxDepth);
+        this.__addRoomNode(room, chanceToNewNode + 0.1, maxDepth);
     }
 
     // create a new node
     if (Math.random() < chanceToNewNode) {
         this.__tree.addToCurrentAndJump(
             new Node(
-                roomName,
+                room,
                 this.__tree.currentNode()
             )
         );
@@ -67,7 +67,7 @@ ChapterMap.prototype.__addRoomNode = function(roomName, chanceToNewNode, maxDept
             this.__tree.jumpToNode(childrens[childrenIndex].name());
         }
 
-        this.__addRoomNode(roomName, chanceToNewNode + 0.1, maxDepth);
+        this.__addRoomNode(room, chanceToNewNode + 0.1, maxDepth);
     }
 }
 
@@ -112,7 +112,7 @@ ChapterMap.prototype.__generateTree = function() {
 
         this.__tree.addToCurrentAndJump(
             new Node(
-                roomsLeft[index],
+                this.__rooms.roomByName(roomsLeft[index]),
                 this.__tree.currentNode()
             )
         );
@@ -131,7 +131,11 @@ ChapterMap.prototype.__generateTree = function() {
     while (roomsLeft.length > 0) {
         var nextRoomIndex = Math.floor(Math.random() * roomsLeft.length);
 
-        this.__addRoomNode(roomsLeft[nextRoomIndex], 0.4, maxDepth);
+        this.__addRoomNode(
+            this.__rooms.roomByName(roomsLeft[nextRoomIndex]),
+            0.4,
+            maxDepth
+        );
 
         roomsLeft.splice(nextRoomIndex, 1);
     }

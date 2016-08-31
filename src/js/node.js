@@ -1,12 +1,12 @@
 /**
  * Node object
- * @param {string} name
- * @param {Node}   parent
+ * @param {Room} room
+ * @param {Node} parent
  */
-function Node(name, parent = undefined) {
+function Node(room, parent = undefined) {
     this.__depth     = 0;
     this.__childrens = [];
-    this.__name      = name;
+    this.__room      = room;
     this.__parent    = parent;
 }
 
@@ -60,7 +60,7 @@ Node.prototype.childrenByName = function(name) {
  * @return {string}
  */
 Node.prototype.name = function() {
-    return this.__name;
+    return this.__room.name();
 }
 
 /**
@@ -73,7 +73,7 @@ Node.prototype.parent = function() {
         return this.__parent;
     }
 
-    throw 'the node "' + this.__name + '" is the root -> cannot find it\'s parent';
+    throw 'the node "' + this.name() + '" is the root -> cannot find it\'s parent';
 }
 
 /**
@@ -93,9 +93,9 @@ Node.prototype.remove = function(childName) {
         }
 
         if (this.__childrens[index].name() === childName) {
-            throw 'cannot remove the child "' + childName + '" from the node "' + this.__name + '" -> it\'s a node'
+            throw 'cannot remove the child "' + childName + '" from the node "' + this.name() + '" -> it\'s a node'
         }
     }
 
-    throw 'cannot remove the child "' + childName + '" from the node "' + this.__name + '" -> not found';
+    throw 'cannot remove the child "' + childName + '" from the node "' + this.name() + '" -> not found';
 }
