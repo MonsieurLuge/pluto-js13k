@@ -2,7 +2,7 @@
  * Entities object
  * @param {array} entities
  */
-function Entities(entities) {
+function Entities(entities = []) {
     this.__entities = entities;
 }
 
