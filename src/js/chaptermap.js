@@ -3,13 +3,9 @@
  * @param {Rooms}   rooms
  * @param {MapTree} mapTree
  */
-function ChapterMap(rooms) {
-    this.__map   = [];
-    this.__rooms = rooms;
-    // should be in a secondary ctor, but not available in JS
-    this.__tree  = new Tree(
-        new Node(rooms.roomByType('entrance'))
-    );
+function ChapterMap(tree) {
+    this.__map  = [];
+    this.__tree = tree;
 }
 
 /**

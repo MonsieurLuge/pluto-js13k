@@ -3,9 +3,9 @@
  * @param {array} roomsDefinitions
  */
 function MapTree(roomsDefinitions = []) {
-    this.__currentNode      = root;
+    this.__currentNode      = undefined;
     this.__roomsDefinitions = roomsDefinitions;
-    this.__root             = root;
+    this.__root             = undefined;
 }
 
 /**
