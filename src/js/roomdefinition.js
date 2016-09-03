@@ -6,10 +6,10 @@
  * @param {Entities} mandatoryEntities
  */
 function RoomDefinition(name, type, biome, mandatoryEntities) {
-    this->__biome             = biome;
-    this->__mandatoryEntities = mandatoryEntities;
-    this->__name              = name;
-    this->__type              = type;
+    this.__biome             = biome;
+    this.__mandatoryEntities = mandatoryEntities;
+    this.__name              = name;
+    this.__type              = type;
 }
 
 /**
@@ -17,7 +17,7 @@ function RoomDefinition(name, type, biome, mandatoryEntities) {
  * @return {Biome}
  */
 RoomDefinition.prototype.biome = function() {
-    return this->__biome;
+    return this.__biome;
 }
 
 /**
@@ -25,7 +25,7 @@ RoomDefinition.prototype.biome = function() {
  * @return {Entities}
  */
 RoomDefinition.prototype.mandatoryEntities = function() {
-    return this->__mandatoryEntities;
+    return this.__mandatoryEntities;
 }
 
 /**
@@ -33,7 +33,7 @@ RoomDefinition.prototype.mandatoryEntities = function() {
  * @return {string}
  */
 RoomDefinition.prototype.name = function() {
-    return this->__name;
+    return this.__name;
 }
 
 /**
@@ -41,5 +41,5 @@ RoomDefinition.prototype.name = function() {
  * @return {string}
  */
 RoomDefinition.prototype.type = function() {
-    return this->__type;
+    return this.__type;
 }
