@@ -1,17 +1,18 @@
 /**
- * Tree object
- * @param {Node} root
+ * MapTree object
+ * @param {array} roomsDefinitions
  */
-function Tree(root) {
-    this.__currentNode = root;
-    this.__root        = root;
+function MapTree(roomsDefinitions = []) {
+    this.__currentNode      = root;
+    this.__roomsDefinitions = roomsDefinitions;
+    this.__root             = root;
 }
 
 /**
  * Adds a node to the current node
  * @param {Node} node
  */
-Tree.prototype.addToCurrent = function(node) {
+MapTree.prototype.addToCurrent = function(node) {
     this.__currentNode.add(node);
 }
 
@@ -19,7 +20,7 @@ Tree.prototype.addToCurrent = function(node) {
  * Adds a node to the current one, and jumps to it
  * @param {Node} node
  */
-Tree.prototype.addToCurrentAndJump = function(node) {
+MapTree.prototype.addToCurrentAndJump = function(node) {
     this.addToCurrent(node);
 
     this.__currentNode = node;
@@ -29,7 +30,7 @@ Tree.prototype.addToCurrentAndJump = function(node) {
  * Returns the current node
  * @return {Node}
  */
-Tree.prototype.currentNode = function() {
+MapTree.prototype.currentNode = function() {
     return this.__currentNode;
 }
 
@@ -38,7 +39,7 @@ Tree.prototype.currentNode = function() {
  * @param  {string} name
  * @throws {string}
  */
-Tree.prototype.jumpToNode = function(name) {
+MapTree.prototype.jumpToNode = function(name) {
     // TODO jump to a named node
     throw 'TODO jump to a named node';
 }
@@ -46,6 +47,6 @@ Tree.prototype.jumpToNode = function(name) {
 /**
  * Jumps to the root node
  */
-Tree.prototype.jumpToRoot = function() {
+MapTree.prototype.jumpToRoot = function() {
     this.__currentNode = this.__root;
 }

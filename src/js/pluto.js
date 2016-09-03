@@ -43,7 +43,7 @@ var game = new Game(
     new Chapters([
         new ChapterOne(
             new ChapterMap(
-                new Rooms([
+                new MapTree([
                     new RoomDefinition(
                         'elevator to the surface',
                         'entrance',
