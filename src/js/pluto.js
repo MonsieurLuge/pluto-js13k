@@ -44,40 +44,35 @@ var game = new Game(
         new ChapterOne(
             new ChapterMap(
                 new Rooms([
-                    new Room(
+                    new RoomDefinition(
                         'elevator to the surface',
                         'entrance',
-                        new Terrain(
-                            new ElevatorBiome()
-                        )
+                        new ElevatorBiome(),
+                        new Entities()
                     ),
-                    new Room(
+                    new RoomDefinition(
                         'laboratory access',
                         'exit',
-                        new Terrain(
-                            new ScannerBiome()
-                        )
+                        new ScannerBiome(),
+                        new Entities()
                     ),
-                    new Room(
+                    new RoomDefinition(
                         'test room 1',
                         'common',
-                        new Terrain(
-                            new ElevatorBiome()
-                        )
+                        new ElevatorBiome(),
+                        new Entities()
                     ),
-                    new Room(
+                    new RoomDefinition(
                         'test room 2',
                         'common',
-                        new Terrain(
-                            new ScannerBiome()
-                        )
+                        new ScannerBiome(),
+                        new Entities()
                     ),
-                    new Room(
+                    new RoomDefinition(
                         'test room 3',
                         'common',
-                        new Terrain(
-                            new ScannerBiome()
-                        )
+                        new ScannerBiome(),
+                        new Entities()
                     )
                 ])
             )
