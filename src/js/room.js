@@ -1,10 +1,12 @@
 /**
  * Room object
- * @param {string}  name
- * @param {string}  roomType
+ * @param {string} name
+ * @param {string} roomType
+ * @param {array} exits
  * @param {Terrain} terrain
  */
-function Room(name, roomType, terrain) {
+function Room(name, roomType, exits, terrain) {
+    this.__exits          = exits;
     this.__name           = name;
     this.__roomType       = roomType;
     this.__terrain        = terrain;
@@ -14,11 +16,19 @@ function Room(name, roomType, terrain) {
 
 /**
  * Draws the room
- * @param  {CanvasRenderingContext2D} context
- * @param  {Coordinates}              coordinates
+ * @param {CanvasRenderingContext2D} context
+ * @param {Coordinates} coordinates
  */
 Room.prototype.draw = function(context, coordinates) {
     // TODO draw the room
+}
+
+/**
+ * Returns the exits
+ * @return {array}
+ */
+Room.prototype.exits = function() {
+    throw 'method not implemented : Room::exits';
 }
 
 /**

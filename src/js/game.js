@@ -1,8 +1,8 @@
 /**
  * Game object
- * @param {Scene}    scene
+ * @param {Scene} scene
  * @param {Chapters} chapters
- * @param {Player}   player
+ * @param {Player} player
  */
 function Game(scene, chapters, player) {
     this.__chapters = chapters;
@@ -49,7 +49,7 @@ Game.prototype.__animate = function() {
 
 /**
  * Returns the entity environment
- * @param  {integer} livingEntityIndex
+ * @param {integer} livingEntityIndex
  * @return {array}
  */
 Game.prototype.__environment = function(livingEntityIndex) {
@@ -112,7 +112,7 @@ Game.prototype.__loop = function(mode) {
  */
 Game.prototype.__render = function() {
     // draw the room
-    this.__chapters.current().currentRoom().draw(
+    this.__chapters.current().chapterMap().currentRoom().draw(
         this.__scene.buffer().context2d(),
         this.__player.coordinates()
     );
