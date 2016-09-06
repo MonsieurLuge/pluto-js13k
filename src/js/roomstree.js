@@ -41,7 +41,16 @@ RoomsTree.prototype.__generateRoom = function(roomDefinition) {
  * Generates the tree
  */
 RoomsTree.prototype.__generateTree = function() {
-    this.__root = this.__generateRoom(this.__roomDefinitionByType('entrance'));
+    // entrance room
+    this.__root = this.__roomDefinitionByType('entrance').name();
+
+    // max depth
+    var maxDepth = Math.floor(this.__roomsDefinition.length / 2);
+
+    // direct path to the exit
+
+    // add the others rooms
+
 }
 
 /**
