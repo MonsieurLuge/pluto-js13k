@@ -2,7 +2,7 @@
  * Rooms object
  * @param {Room[]} rooms
  */
-function Rooms(rooms) {
+function Rooms(rooms = []) {
     this.__rooms = rooms;
 }
 

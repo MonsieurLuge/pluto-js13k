@@ -43,39 +43,37 @@ var game = new Game(
     new Chapters([
         new ChapterOne(
             new ChapterMap(
-                'elevator to the surface',
-                new RoomsTree([
-                    new RoomDefinition(
-                        'elevator to the surface',
-                        'entrance',
-                        new ElevatorBiome(),
-                        new Entities()
-                    ),
-                    new RoomDefinition(
-                        'laboratory access',
-                        'exit',
-                        new ScannerBiome(),
-                        new Entities()
-                    ),
-                    new RoomDefinition(
-                        'test room 1',
-                        'common',
-                        new ElevatorBiome(),
-                        new Entities()
-                    ),
-                    new RoomDefinition(
-                        'test room 2',
-                        'common',
-                        new ScannerBiome(),
-                        new Entities()
-                    ),
-                    new RoomDefinition(
-                        'test room 3',
-                        'common',
-                        new ScannerBiome(),
-                        new Entities()
-                    )
-                ])
+                new Tree(
+                    'elevator to the surface',
+                    'laboratory access',
+                    new RoomsDefinitions([
+                        new RoomDefinition(
+                            'elevator to the surface',
+                            new ElevatorBiome(),
+                            new Entities()
+                        ),
+                        new RoomDefinition(
+                            'laboratory access',
+                            new ScannerBiome(),
+                            new Entities()
+                        ),
+                        new RoomDefinition(
+                            'test room 1',
+                            new ElevatorBiome(),
+                            new Entities()
+                        ),
+                        new RoomDefinition(
+                            'test room 2',
+                            new ScannerBiome(),
+                            new Entities()
+                        ),
+                        new RoomDefinition(
+                            'test room 3',
+                            new ScannerBiome(),
+                            new Entities()
+                        )
+                    ])
+                )
             )
         )
     ]),

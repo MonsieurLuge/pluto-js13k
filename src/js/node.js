@@ -1,34 +1,20 @@
 /**
  * Node object
- * @param {Room} room
- * @param {Node} parent
+ * @param {string} name
+ * @param {string} parent
  */
-function Node(room, parent = undefined) {
-    this.__depth     = 0;
+function Node(name, parent = undefined) {
     this.__childrens = [];
-    this.__room      = room;
+    this.__name      = name;
     this.__parent    = parent;
 }
 
 /**
  * Adds a children
- * @param {Node} node
+ * @param {string} name
  */
-Node.prototype.add = function(node) {
-    this.__childrens.push(node);
-}
-
-/**
- * Returns the depth (root is 0)
- * @return {integer}
- */
-Node.prototype.depth = function() {
-    try {
-        return this.parent().depth() + 1;
-    } catch (message) {
-        // no parent found ? so it's the root one
-        return 0;
-    }
+Node.prototype.addChildren = function(name) {
+    this.__childrens.push(name);
 }
 
 /**
@@ -40,32 +26,16 @@ Node.prototype.childrens = function() {
 }
 
 /**
- * Returns a children
- * @param {string} name
- * @return {Node}
- * @throws {string}
- */
-Node.prototype.childrenByName = function(name) {
-    for (var index = 0; index < this.__childrens.length; index++) {
-        if (this.__childrens[index].name() === name) {
-            return this.__childrens[index];
-        }
-    }
-
-    throw 'cannot find the children named "' + name + '" for the node "' + this.__name + '"';
-}
-
-/**
  * Returns the name
  * @return {string}
  */
 Node.prototype.name = function() {
-    return this.__room.name();
+    return this.__name;
 }
 
 /**
- * Returns the parent node
- * @return {Node}
+ * Returns the parent
+ * @return {string}
  * @throws {string}
  */
 Node.prototype.parent = function() {
@@ -73,5 +43,5 @@ Node.prototype.parent = function() {
         return this.__parent;
     }
 
-    throw 'the node "' + this.name() + '" is the root -> cannot find it\'s parent';
+    throw 'the node "' + this.__name + '" is the root -> cannot find it\'s parent';
 }

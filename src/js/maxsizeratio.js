@@ -6,7 +6,7 @@
  * @param {integer} wrapperHeight
  */
 function MaxSizeRatio(width, height, wrapperWidth, wrapperHeight) {
-    // should be in a secondary ctor, but not available in JS
+    // woul'd be better in a secondary ctor, but not available in JS :/
     this.__size = new Size(
         new MaxWidthRatio(
             width,
