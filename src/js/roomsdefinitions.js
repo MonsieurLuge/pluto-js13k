@@ -15,6 +15,22 @@ RoomsDefinitions.prototype.add = function(roomDefinition) {
 }
 
 /**
+ * Returns the room definitions
+ * @return {RoomDefinition[]}
+ */
+RoomsDefinitions.prototype.list = function() {
+    return this.__roomsDefinitions;
+}
+
+/**
+ * Returns the total number of rooms definitions
+ * @return {integer}
+ */
+RoomsDefinitions.prototype.number = function() {
+    return this.__roomsDefinitions.length;
+}
+
+/**
  * Removes a room definition by its name
  * @param {string} name
  * @throws {string}
