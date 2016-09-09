@@ -26,6 +26,14 @@ Node.prototype.childrens = function() {
 }
 
 /**
+ * Returns the depth
+ * @return {integer}
+ */
+Node.prototype.depth = function() {
+    return this.__parent.depth() + 1;
+}
+
+/**
  * Returns the name
  * @return {string}
  */

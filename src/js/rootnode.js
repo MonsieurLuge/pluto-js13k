@@ -24,6 +24,14 @@ RootNode.prototype.childrens = function() {
 }
 
 /**
+ * Returns the depth
+ * @return {integer}
+ */
+RootNode.prototype.depth = function() {
+    return 0;
+}
+
+/**
  * Returns the name
  * @return {string}
  */

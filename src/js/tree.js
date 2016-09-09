@@ -55,6 +55,25 @@ Tree.prototype.__addNode = function(roomName, parent) {
 }
 
 /**
+ * Adds the root node to the tree
+ * @param {string} roomName
+ * @throws {string} if the tree is not empty
+ */
+Tree.prototype.__addRootNode = function(roomName, parent) {
+    if (this.__tree.length > 0) {
+        throw 'cannot add the root node -> tree is not empty';
+    }
+
+    this.__tree.push(
+        new RootNode(
+            roomName
+        )
+    );
+
+    this.__roomsLeft.removeByName(roomName);
+}
+
+/**
  * Generates the tree
  */
 Tree.prototype.__generateTree = function() {
@@ -62,26 +81,38 @@ Tree.prototype.__generateTree = function() {
     var maxDepth = Math.floor(this.__roomsDefinitions.number() / 2);
 
     // add the entrance room
-    this.__addNode(this.__entrance);
+    this.__addRootNode(this.__entrance);
 
     // direct path to the exit
-    var depth = 1;
+    var depth            = 1;
+    var previousRoomName = this.__entrance;
 
     while (depth < maxDepth) {
-        var index = Math.floor(Math.random() * this.__roomsLeft.number())
+        var index    = Math.floor(Math.random() * this.__roomsLeft.number())
+        var roomName = this.__roomsLeft.list()[index].name();
 
-        if (this.__roomsLeft.list()[index].name() === this.__exit) {
+        if (roomName === this.__exit) {
             continue;
         }
 
-        this.__addNode(this.__roomsLeft.list()[index].name());
+        this.__addNode(
+            this.__roomsLeft.list()[index].name(),
+            previousRoomName
+        );
 
+        // go for the next node
+        previousRoomName = roomName;
         depth++;
     }
 
     // add the exit
-    this.__addNode(this.__exit);
+    this.__addNode(
+        this.__exit,
+        previousRoomName
+    );
 
     // add the others rooms
-    console.log(this.__tree);
+    while (this.__roomsLeft.number() > 0) {
+
+    }
 }

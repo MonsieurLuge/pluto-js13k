@@ -43,7 +43,7 @@ var game = new Game(
     new Chapters([
         new ChapterOne(
             new ChapterMap(
-                new Tree(
+                new ChapterTree(
                     'elevator to the surface',
                     'laboratory access',
                     new RoomsDefinitions([
@@ -71,8 +71,20 @@ var game = new Game(
                             'test room 3',
                             new ScannerBiome(),
                             new Entities()
+                        ),
+                        new RoomDefinition(
+                            'test room 4',
+                            new ElevatorBiome(),
+                            new Entities()
+                        ),
+                        new RoomDefinition(
+                            'test room 5',
+                            new ScannerBiome(),
+                            new Entities()
                         )
-                    ])
+                    ]),
+                    new Tree(),
+                    new Rooms()
                 )
             )
         )

@@ -1,13 +1,11 @@
 /**
  * ChapterMap object
- * @param {Tree} tree
+ * @param {ChapterTree} chapterTree
  */
-function ChapterMap(tree) {
-    this.__currentRoom = undefined;
-    this.__map         = [];
-    this.__tree        = tree;
-    // woul'd be better in a secondary ctor, but not available in JS :/
-    this.__rooms       = new Rooms();
+function ChapterMap(chapterTree) {
+    this.__currentRoomName = undefined;
+    this.__map             = [];
+    this.__chapterTree     = chapterTree;
 }
 
 /**
@@ -15,13 +13,13 @@ function ChapterMap(tree) {
  * @return {Room}
  */
 ChapterMap.prototype.currentRoom = function() {
-    if (this.__currentRoom) {
-        return this.__rooms.roomByName(this.__currentRoom);
+    if (this.__currentRoomName) {
+        return this.__rooms.roomByName(this.__currentRoomName);
     }
 
-    this.__currentRoom = this.__tree.rootNode().name();
+    this.__currentRoomName = this.__chapterTree.rootNode().name();
 
-    return this.__rooms.roomByName(this.__currentRoom);
+    return this.__rooms.roomByName(this.__currentRoomName);
 }
 
 /**
