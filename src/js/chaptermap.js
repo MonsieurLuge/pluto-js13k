@@ -1,11 +1,13 @@
 /**
  * ChapterMap object
  * @param {ChapterTree} chapterTree
+ * @param {RoomsDefinitions} roomsDefinitions
  */
-function ChapterMap(chapterTree) {
-    this.__currentRoomName = undefined;
-    this.__map             = [];
-    this.__chapterTree     = chapterTree;
+function ChapterMap(chapterTree, roomsDefinitions) {
+    this.__chapterTree      = chapterTree;
+    this.__currentRoomName  = undefined;
+    this.__map              = [];
+    this.__roomsDefinitions = roomsDefinitions;
 }
 
 /**

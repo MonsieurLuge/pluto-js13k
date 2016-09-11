@@ -112,7 +112,7 @@ Game.prototype.__loop = function(mode) {
  */
 Game.prototype.__render = function() {
     // draw the room
-    this.__chapters.current().chapterMap().currentRoom().draw(
+    this.__chapters.current().currentRoom().draw(
         this.__scene.buffer().context2d(),
         this.__player.coordinates()
     );

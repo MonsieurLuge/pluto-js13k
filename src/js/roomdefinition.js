@@ -4,11 +4,13 @@
  * @param {string} type
  * @param {Biome} biome
  * @param {Entities} mandatoryEntities
+ * @param {RoomShape} roomShape
  */
-function RoomDefinition(name, type, biome, mandatoryEntities) {
+function RoomDefinition(name, type, biome, mandatoryEntities, roomShape) {
     this.__biome             = biome;
     this.__mandatoryEntities = mandatoryEntities;
     this.__name              = name;
+    this.__roomShape         = roomShape;
     this.__type              = type;
 }
 

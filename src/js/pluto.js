@@ -42,6 +42,7 @@ var game = new Game(
     ),
     new Chapters([
         new ChapterOne(
+            new Rooms(),
             new ChapterMap(
                 new ChapterTree(
                     'elevator to the surface',
@@ -50,41 +51,47 @@ var game = new Game(
                         new RoomDefinition(
                             'elevator to the surface',
                             new ElevatorBiome(),
-                            new Entities()
+                            new Entities(),
+                            new RoomShape()
                         ),
                         new RoomDefinition(
                             'laboratory access',
                             new ScannerBiome(),
-                            new Entities()
+                            new Entities(),
+                            new RoomShape()
                         ),
                         new RoomDefinition(
                             'test room 1',
                             new ElevatorBiome(),
-                            new Entities()
+                            new Entities(),
+                            new RoomShape()
                         ),
                         new RoomDefinition(
                             'test room 2',
                             new ScannerBiome(),
-                            new Entities()
+                            new Entities(),
+                            new RoomShape()
                         ),
                         new RoomDefinition(
                             'test room 3',
                             new ScannerBiome(),
-                            new Entities()
+                            new Entities(),
+                            new RoomShape()
                         ),
                         new RoomDefinition(
                             'test room 4',
                             new ElevatorBiome(),
-                            new Entities()
+                            new Entities(),
+                            new RoomShape()
                         ),
                         new RoomDefinition(
                             'test room 5',
                             new ScannerBiome(),
-                            new Entities()
+                            new Entities(),
+                            new RoomShape()
                         )
                     ]),
-                    new Tree(),
-                    new Rooms()
+                    new Tree()
                 )
             )
         )
